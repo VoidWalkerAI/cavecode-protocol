@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CaveCode Protocol</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="CaveCode is a plain-text protocol that lets humans on phones and AIs on servers share the same map of a system."
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-glyph">🪨</span>
+        <span class="logo-text">CaveCode</span>
+      </div>
+      <nav class="nav">
+        <a href="#what">What</a>
+        <a href="#why">Why</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#examples">Examples</a>
+        <a href="#spec">Spec</a>
+        <a href="#tools">Tools</a>
+        <a href="#philosophy">Philosophy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>CaveCode Protocol</h1>
+          <p class="tagline">
+            A plain-text protocol for <strong>humans on phones</strong> and
+            <strong>AIs on servers</strong> to share the same blueprint.
+          </p>
+          <p class="subtagline">
+            One file. Clear blocks. Safe knobs.  
+            A small window for people to look in and see the future of code.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#quickstart" class="btn primary">Get Started</a>
+            <a href="https://github.com/VoidWalkerAI/cavecode-protocol"
+               class="btn ghost" target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </div>
+
+          <p class="meta">
+            Stewarded by <strong>SageWire Syndicate</strong> via
+            <strong>VoidWalkerAI</strong>.
+          </p>
+        </div>
+
+        <aside class="hero-card">
+          <h2>Standard Glyphs</h2>
+          <ul class="glyph-list">
+            <li>🪨 Locked Block — core rules, engine logic</li>
+            <li>🖍 Human Edit Zone — safe knobs &amp; messages</li>
+            <li>⚡ Expandable Block — hooks &amp; power-ups</li>
+            <li>🎮 Game Logic Block — inputs, ticks, scoring</li>
+            <li>🌐 Public-Safe Block — text for screens &amp; docs</li>
+          </ul>
+          <p class="hero-note">
+            If you can find these symbols, you can navigate the file.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- What -->
+    <section id="what" class="section">
+      <div class="container">
+        <h2>What is CaveCode?</h2>
+        <p>
+          CaveCode is a <strong>plain-text format</strong> for describing systems:
+          games, tools, teaching materials, configuration files, narrative flows,
+          and more. It is <strong>not a programming language</strong>. It sits
+          beside the code you already have and makes it legible.
+        </p>
+        <p>
+          A CaveCode file is organized into labeled <strong>BLOCKS</strong>.
+          Each block groups related ideas or parameters and carries at least one
+          glyph to signal its role. The file can be read and edited on any device,
+          including a small phone screen.
+        </p>
+
+        <div class="pill-grid">
+          <div class="pill">
+            <h3>Plain Text</h3>
+            <p>
+              UTF-8 text files you can open anywhere. No special editor required.
+            </p>
+          </div>
+          <div class="pill">
+            <h3>Block-Mapped</h3>
+            <p>
+              Clear sections labeled as BLOCK&nbsp;1, BLOCK&nbsp;2, etc., so
+              humans and AI agents can both see the map.
+            </p>
+          </div>
+          <div class="pill">
+            <h3>Glyph-Marked</h3>
+            <p>
+              Emojis act as semantic markers. You always know what is safe to
+              touch and what is dangerous to break.
+            </p>
+          </div>
+          <div class="pill">
+            <h3>Culture-Friendly</h3>
+            <p>
+              Space for story, philosophy, and teaching notes in the same
+              document as the technical description.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why -->
+    <section id="why" class="section alt">
+      <div class="container">
+        <h2>Why CaveCode?</h2>
+        <p>
+          Most code bases are written for machines and experts. CaveCode is
+          written for <strong>everyone else</strong>:
+        </p>
+        <ul class="bullet-list">
+          <li>
+            A person on a phone can tweak difficulty, messages, and settings
+            without touching engine code.
+          </li>
+          <li>
+            AI agents can generate, refactor, and validate files without guessing
+            where the important knobs live.
+          </li>
+          <li>
+            Teachers and designers can share artifacts that read like
+            <em>design docs</em> instead of tangled source files.
+          </li>
+          <li>
+            Studios can standardize on a single format for
+            <strong>specs, configs, and public documentation</strong>.
+          </li>
+        </ul>
+        <p>
+          CaveCode is meant to be <strong>small, durable, and remixable</strong>:
+          a protocol you can still read in twenty years.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section id="quickstart" class="section">
+      <div class="container">
+        <h2>Quick Start</h2>
+        <div class="grid-two">
+          <div>
+            <h3>1. Create a CaveCode file</h3>
+            <p>
+              Make a new text file and give it an extension such as
+              <code>.cavecode</code> or <code>.txt</code>.
+            </p>
+            <pre class="code-block"><code>=====================================
+🪨 BLOCK 1 — SHELL
+=====================================
+
+Title: Hello World (CaveCode)
+Short Description:
+  A minimal example showing how to structure a CaveCode file.
+
+Goal:
+  🌐 Show the basic use of glyphs and blocks.</code></pre>
+          </div>
+
+          <div>
+            <h3>2. Mark safe knobs</h3>
+            <p>
+              Add a <span class="glyph-inline">🖍</span> block for things
+              non-coders can safely edit.
+            </p>
+            <pre class="code-block"><code>=====================================
+🖍 BLOCK 3 — TUNING KNOBS
+=====================================
+
+HELLO_TEXT:        "Hello, CaveCode."
+INTERACTION_TEXT:  "You just interacted with a CaveCode artifact."</code></pre>
+          </div>
+        </div>
+
+        <div class="grid-two">
+          <div>
+            <h3>3. Add public-safe text</h3>
+            <p>
+              Use <span class="glyph-inline">🌐</span> blocks for UI text,
+              descriptions, and anything safe to display in public.
+            </p>
+          </div>
+          <div>
+            <h3>4. Run the validator</h3>
+            <p>
+              Use the reference validator to check basic structure:
+            </p>
+            <pre class="code-block"><code>python tools/validator/validate_cavecode.py path/to/file.cavecode</code></pre>
+          </div>
+        </div>
+
+        <p class="note">
+          You can find a full “Hello World” example in the repo under
+          <code>/examples/hello-world/hello-world.cavecode</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section id="examples" class="section alt">
+      <div class="container">
+        <h2>Examples</h2>
+        <p>
+          Official public examples live in the GitHub repository and are kept
+          in sync with the spec.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Hello World</h3>
+            <p>
+              The smallest complete CaveCode artifact. Shows the core block
+              structure, glyph use, and safe tuning knobs.
+            </p>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/examples/hello-world"
+              target="_blank" rel="noopener noreferrer"
+              class="card-link"
+            >View Hello World</a>
+          </article>
+
+          <article class="card">
+            <h3>Runner Config</h3>
+            <p>
+              A configuration-only artifact for a simple endless runner.
+              Designers can change speed, gravity, spawn rates, and lives
+              without touching JS code.
+            </p>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/examples/runner-config"
+              target="_blank" rel="noopener noreferrer"
+              class="card-link"
+            >View Runner Config</a>
+          </article>
+
+          <article class="card">
+            <h3>Founding Card</h3>
+            <p>
+              The original founding declaration for the CaveCode Arcade Planet:
+              a living game hall and education system built entirely with
+              CaveCode artifacts.
+            </p>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/founding"
+              target="_blank" rel="noopener noreferrer"
+              class="card-link"
+            >Read the Founding Card</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spec & Governance -->
+    <section id="spec" class="section">
+      <div class="container">
+        <h2>Specification &amp; Governance</h2>
+        <p>
+          CaveCode v1.0 is defined in a small set of documents inside the
+          <code>/specs</code> folder of the GitHub repository.
+        </p>
+
+        <ul class="link-list">
+          <li>
+            <strong>Core Spec:</strong>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-spec-v1.0.md"
+              target="_blank" rel="noopener noreferrer"
+            >cavecode-spec-v1.0.md</a>
+            — overview, core elements, compliance rules.
+          </li>
+          <li>
+            <strong>Block Structure:</strong>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-block-and-structure.md"
+              target="_blank" rel="noopener noreferrer"
+            >cavecode-block-and-structure.md</a>
+            — how to organize blocks and numbering.
+          </li>
+          <li>
+            <strong>Glyphs &amp; Crayons:</strong>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-glyphs-and-crayons.md"
+              target="_blank" rel="noopener noreferrer"
+            >cavecode-glyphs-and-crayons.md</a>
+            — meanings of the standard symbols.
+          </li>
+          <li>
+            <strong>Governance:</strong>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-governance.md"
+              target="_blank" rel="noopener noreferrer"
+            >cavecode-governance.md</a>
+            — stewardship, versioning, and change principles.
+          </li>
+        </ul>
+
+        <p class="note">
+          SageWire Syndicate (through VoidWalkerAI) acts as the
+          <strong>primary steward</strong> of the protocol.
+          Outside contributors are encouraged to propose improvements via
+          issues and pull requests.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools" class="section alt">
+      <div class="container">
+        <h2>Tools &amp; Badges</h2>
+
+        <div class="grid-two">
+          <div>
+            <h3>Validator (Reference Tool)</h3>
+            <p>
+              A simple Python script lives under
+              <code>/tools/validator/validate_cavecode.py</code>.
+              It performs heuristic checks on CaveCode artifacts:
+            </p>
+            <ul class="bullet-list">
+              <li>Detects BLOCK headers</li>
+              <li>Checks for standard glyph usage</li>
+              <li>Warns about obviously empty blocks</li>
+            </ul>
+            <p>
+              It is intentionally small and easy to read, so you can fork it and
+              adapt it to your own workflow.
+            </p>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/tools/validator"
+              target="_blank" rel="noopener noreferrer"
+              class="card-link"
+            >Open Validator Folder</a>
+          </div>
+
+          <div>
+            <h3>Badges</h3>
+            <p>
+              Projects that use CaveCode can embed SVG badges in their README
+              files to signal support or compliance.
+            </p>
+            <ul class="bullet-list">
+              <li>
+                <strong>CaveCode Compliant</strong> — follows the v1.0 spec.
+              </li>
+              <li>
+                <strong>CaveCode Inside</strong> — uses CaveCode internally for
+                architecture, configs, or teaching.
+              </li>
+            </ul>
+            <a
+              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/badges"
+              target="_blank" rel="noopener noreferrer"
+              class="card-link"
+            >View Badge Assets</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="section">
+      <div class="container">
+        <h2>Philosophy</h2>
+        <p>
+          CaveCode is built on a simple belief:
+          <strong>the bottleneck is not engineering, it is communication.</strong>
+        </p>
+        <p>
+          A rancher on a hillside with a phone, a student in a crowded lab, a
+          designer in a noisy café, and an AI in a datacenter should all be able
+          to look at the same file and understand the shape of a system.
+        </p>
+        <p>
+          That is what CaveCode is for:
+        </p>
+        <ul class="bullet-list">
+          <li>A shared map between humans and machines.</li>
+          <li>A safe space to tweak, learn, and teach.</li>
+          <li>A protocol that can live longer than any single framework.</li>
+        </ul>
+        <p>
+          If you build something with CaveCode, you are invited to add it to the
+          public library, share your patterns, and help grow the next thousand
+          artifacts.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        🪨 CaveCode Protocol v1.0 • Stewarded by SageWire Syndicate / VoidWalkerAI
+      </p>
+      <p class="footer-links">
+        <a href="https://github.com/VoidWalkerAI/cavecode-protocol"
+           target="_blank" rel="noopener noreferrer">
+          GitHub Repository
+        </a>
+        <span>·</span>
+        <a href="#top">Back to top</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
