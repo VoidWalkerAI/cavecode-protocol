@@ -1,0 +1,55 @@
+███████████████████████████████████████████
+█ CAVECODE EXAMPLE — RUNNER CONFIG (v1.0)
+███████████████████████████████████████████
+
+================================================
+🪨 BLOCK 1 — GAME SHELL
+================================================
+Title: Minimal Runner Config
+Short Description:
+  Configuration-only CaveCode for a simple endless runner.
+
+Goal:
+  🌐 Provide tunable parameters for a JS or engine-based runner.
+
+================================================
+🎮 BLOCK 2 — CORE PARAMETERS (ENGINE-BOUND)
+================================================
+# These values are mirrored into real engine variables.
+TICK_RATE_MS:          16          # ~60 FPS
+GRAVITY:               1.0
+JUMP_FORCE:            16.0
+MAX_FALL_SPEED:        24.0
+
+OBSTACLE_SPAWN_MS:     950
+OBSTACLE_SPAWN_MIN_MS: 350
+
+================================================
+🖍️ BLOCK 3 — DIFFICULTY TUNING
+================================================
+# Safe for designers / non-coders to adjust.
+
+SPEED_BASE:            6.0
+SPEED_INCREMENT:       0.4     # per level
+MAX_SPEED:             16.0
+
+STARTING_LIVES:        3
+MAX_LIVES:             5
+
+================================================
+🌐 BLOCK 4 — PLAYER-FACING TEXT
+================================================
+TITLE_TEXT:            "CaveCode Runner"
+START_MESSAGE:         "Tap to jump. Don't hit the obstacles."
+GAME_OVER_MESSAGE:     "You fell. Tap to try again."
+VICTORY_MESSAGE:       "You survived the wave. Press on."
+
+================================================
+🖍️ BLOCK 5 — HUMAN NOTES
+================================================
+# A JS engine could:
+# - Read BLOCK 2 for physics
+# - Read BLOCK 3 for difficulty
+# - Read BLOCK 4 for UI text
+#
+# Designers can now tune without touching the engine code.
