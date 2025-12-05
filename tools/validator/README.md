@@ -19,5 +19,4 @@ Usage:
 ```bash
 python tools/validator/validate_cavecode.py path/to/file.cavecode
 
-```bash
 python tools/validator/validate_cavecode_v1_1.py path/to/file.cavecode
