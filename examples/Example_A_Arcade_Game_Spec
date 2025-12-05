@@ -1,0 +1,71 @@
+========================================
+🧱 BLOCK 1 — SHELL
+========================================
+Title: Cave Runner
+Short Description:
+    Side-scrolling endless runner where the player avoids hazards
+    and collects shards for score.
+
+Goal:
+    Stay alive as long as possible and achieve a high score.
+
+========================================
+🎮 BLOCK 2 — GAME LOOP / BEHAVIOR
+========================================
+On Start:
+    - Spawn player at left side of screen.
+    - Initialize score and difficulty level 1.
+    - Start background scroll.
+
+On Input:
+    - SPACE / TAP: Player jumps.
+    - Longer press = slightly higher jump (optional).
+
+On Update (each frame / tick):
+    - Move player forward at SPEED_BASE, increasing over time.
+    - Spawn obstacles at SPAWN_RATE with random gaps.
+    - Detect collisions: if player hits obstacle → trigger GAME OVER.
+    - Increase difficulty every DIFFICULTY_INTERVAL seconds.
+
+On Game Over:
+    - Stop movement.
+    - Show GAME_OVER_TEXT and final score.
+    - Offer RESTART_BUTTON_TEXT.
+
+========================================
+🖍️ BLOCK 3 — TUNING KNOBS
+========================================
+# These values are SAFE for humans to tweak.
+
+SPEED_BASE:             6.0      # starting horizontal speed
+SPEED_INCREMENT:        0.4      # speed ramp per difficulty step
+GRAVITY:                32.0     # downward force on jumps
+JUMP_FORCE:             16.0     # base jump push
+SPAWN_RATE:             1.2      # seconds between obstacle spawns
+DIFFICULTY_INTERVAL:    20.0     # seconds until difficulty increases
+MAX_LIVES:              1        # classic arcade: 1 life per run
+
+========================================
+🌐 BLOCK 4 — PUBLIC TEXT
+========================================
+TITLE_TEXT:             "Cave Runner"
+START_MESSAGE:          "Tap or press SPACE to jump."
+GAME_OVER_TEXT:         "You fell. Try again."
+SCORE_LABEL:            "Score"
+HIGH_SCORE_LABEL:       "High Score"
+RESTART_BUTTON_TEXT:    "Run Again"
+
+========================================
+📝 BLOCK 5 — HUMAN NOTES
+========================================
+- Visual ideas:
+    - Dark cave background, subtle parallax.
+    - Player is a small explorer with a lantern.
+
+- Sound ideas:
+    - Low rumble ambience.
+    - Soft chime when collecting shards.
+
+- Future expansions:
+    - Power-ups (double jump, slow motion).
+    - New biomes as difficulty rises.
