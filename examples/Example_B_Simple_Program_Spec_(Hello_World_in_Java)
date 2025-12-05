@@ -1,0 +1,54 @@
+========================================
+🧱 BLOCK 1 — SHELL
+========================================
+Title: Hello World (Java Edition)
+Short Description:
+    A simple Java program that displays "Hello, World!" to the console.
+
+Goal:
+    Output a greeting message to demonstrate basic Java syntax.
+
+========================================
+🎮 BLOCK 2 — PROGRAM BEHAVIOR
+========================================
+On Start:
+    - Java runtime locates the main method.
+    - Execution begins at the main entry point.
+
+On Execute:
+    - System.out.println() sends OUTPUT_MESSAGE to the console.
+    - Message appears in the terminal/console window.
+    - Program exits with status 0.
+
+========================================
+🖍️ BLOCK 3 — TUNING KNOBS
+========================================
+# These values are SAFE for humans to tweak.
+
+OUTPUT_MESSAGE:         "Hello, World!"     # The message to display
+CLASS_NAME:             HelloWorld          # Should match filename
+
+========================================
+🌐 BLOCK 4 — PUBLIC TEXT
+========================================
+CONSOLE_OUTPUT:         "Hello, World!"
+
+========================================
+📝 BLOCK 5 — HUMAN NOTES
+========================================
+- Implementation notes:
+    - Filename should be HelloWorld.java (matches class name).
+    - Compile with: javac HelloWorld.java
+    - Run with: java HelloWorld
+
+- Code structure:
+    public class HelloWorld {
+        public static void main(String[] args) {
+            System.out.println("Hello, World!");
+        }
+    }
+
+- Future ideas:
+    - Add user input.
+    - Support multiple languages.
+    - Colorized console output.
