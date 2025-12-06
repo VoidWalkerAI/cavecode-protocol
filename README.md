@@ -1,141 +1,44 @@
-# 🪨 CaveCode Protocol
+# CaveCode Protocol
 
-**The official specification for CaveCode** —  
-a glyph-based, text-first architecture for humans and AI to co-build systems.
+CaveCode is a plain-text blueprint format for describing systems, games,
+and tools in a way that:
 
-This repository defines:
+- humans can read and edit on a phone  
+- AI can generate and parse  
+- teams can share, remix, and reason about
 
-- the **glyph legend** (🪨, 🖍️, 🔧, 🎮, 🌐)
-- the **block structure** (BLOCK 1, 1A, 2, …)
-- the **CaveCode v1.0 spec**
-- the **validator script**
-- canonical **examples**
-
-CaveCode is:
-
-- **Device-agnostic** — plain text, works anywhere
-- **AI-native** — designed to be read, written, and enforced by AI agents
-- **Human-readable** — a single person on a phone can read and tweak it
-- **Governed** — the meaning of the glyphs is protected by this protocol
+It is **not** a programming language.  
+It sits beside the code as a structured specification: numbered BLOCKS with
+clear labels, emoji glyphs, and a dedicated “human edit zone”.
 
 ---
 
-## 📂 Repository Layout
+## Status
 
-```text
-founding/        # Origin documents (Founding Card)
-spec/            # Protocol documents (spec, glyphs, blocks, governance)
-tools/           # Validator and future automation tools
-examples/        # Minimal CaveCode examples
-badges/          # "Built with CaveCode" badges
+- Spec: **v1.1**
+- Core blocks: SHELL, BEHAVIOR, TUNING KNOBS, PUBLIC TEXT, HUMAN NOTES
+- Official glyphs:
+  - 🧱  structural / shell
+  - 🎮  behavior / game loop / program flow
+  - 🖍️  tuning knobs (safe for humans to edit)
+  - 🌐  public text (UI, labels, copy)
+  - 📁  human notes (comments, ideas, TODOs)
 
-Key entries:
+This repo contains:
 
-founding/CaveCode_v1_FoundingCard.txt
-
-spec/cavecode-spec-v1.0.md
-
-tools/validator/validate_cavecode.py
-
-
-
----
-
-📜 Versioning
-
-Current protocol version: CaveCode v1.0
-
-All v1.0-compliant artifacts MUST follow this spec.
-
-Future drafts will live under /spec/ as cavecode-spec-v1.1-draft.md, etc.
-
-The glyph meanings (🪨, 🖍️, 🔧, 🎮, 🌐) are stable and protected by license.
-
-
+- the **spec and teaching docs**
+- a **scaffold tool** to generate new cards
+- **validators** (minimal + strict v1.1)
+- a **fixer/normalizer** for old or messy cards
+- examples written by humans and AI
 
 ---
 
-✅ What It Means To Be “CaveCode-Compliant”
+## Quick Start
 
-A file is CaveCode v1.0 compliant if:
+### 1. Generate a new CaveCode card
 
-1. It is plain text (UTF-8).
+From the repo root:
 
-
-2. It uses BLOCK sections (e.g., BLOCK 1, BLOCK 2, BLOCK 3…)
-
-
-3. At least one of the standard glyphs appears and follows the meanings in spec/cavecode-glyphs-and-crayons.md
-
-
-4. It is understandable by a non-coder who has read the spec.
-
-
-
-The official validator can help check this:
-
-python tools/validator/validate_cavecode.py path/to/file.cavecode
-
-
----
-
-🤝 Using CaveCode in Your Own Projects
-
-1. Read the spec:
-spec/cavecode-spec-v1.0.md
-
-
-2. Mark your human/AI “law zones” with glyphs:
-
-🪨 Locked logic
-
-🖍️ Human edit zone
-
-🔧 Extension zone
-
-🎮 Game/engine logic
-
-🌐 Public-safe text
-
-
-
-3. Optionally add the badge from badges/ to your README.
-
-
-4. Keep the glyph meanings intact and include the license.
-
-
-
-
----
-
-⚖️ License
-
-See LICENSE.md.
-
-Summary (not legal text):
-You may use, study, remix, and build on this protocol, as long as you:
-
-preserve the meaning of the glyph legend
-
-give appropriate credit to SageWire Syndicate and original authors
-
-keep CaveCode files inspectable by their users
-
-
-
----
-
-🧱 Origin
-
-CaveCode emerged from a mobile-first forge:
-
-conceived and tested on a phone and tablet
-
-hardened in real projects (Arcade Planet, HerdMate-adjacent tools)
-
-documented here so others can build their own worlds
-
-
-> “The world is not discovered. It is forged.”
-— CaveCode Founding Card, Block 1
+```bash
+python tools/scaffold/cavecode_new_card.py "My Artifact Name" > my-artifact.cavecode
