@@ -1,0 +1,84 @@
+Here is response:
+
++------------------------------------------------+
+|  CAVECODE ARTIFACT — GEMINI LINK TAGGER (v1.0) |
++------------------------------------------------+
+|  A plain-text blueprint for https://www.google.com/search?q=URL logging        |
+|  Engine: Gemini                                |
++------------------------------------------------+
+// BLOCK 1 — IDENTITY [LOCKED]
+// AIs: Do not modify this block.
+ID:       gemini-link-tagger-001
+TITLE:    Gemini Link Tagger
+PURPOSE:  A minimalist tool to capture https://www.google.com/search?q=URLs with context tags and timestamps into a flat file.
+AUDIENCE: Researchers, developers, and knowledge workers on mobile devices.
+VERSION:  1.0.0
+AUTHOR:   Gemini (Google)
+// BLOCK 2 — TUNING KNOBS
+// Humans: Edit these values to change how the tool works.
+setting_target_filename: "links.md"      // The file where links get saved
+setting_timestamp_fmt:   "YYYY-MM-DD"    // Format for the date prefix (or "none")
+setting_sort_order:      "newest-top"    // Options: "newest-top", "oldest-bottom"
+setting_list_bullet:     "- "            // The bullet character (e.g. "* ", "- ", "1. ")
+setting_separator:       " :: "          // Divides the https://www.google.com/search?q=URL from the tags in the output
+setting_max_tags:        5               // Maximum number of tags allowed per entry
+setting_default_tags:    "read-later"    // Pre-filled tag suggestion
+setting_auto_clear:      true            // Reset fields after successful save?
+// BLOCK 3 — PUBLIC TEXT
+// Visible labels and messages for the user interface.
+ui_header:       "Quick Link Logger"
+ui_label_url:    "Paste Link:"
+ui_label_tags:   "Tags (comma separated):"
+ui_btn_submit:   "Log Link"
+ui_btn_cancel:   "Clear"
+msg_success:     "Link captured successfully."
+msg_err_no_url:  "Error: The https://www.google.com/search?q=URL field cannot be empty."
+msg_err_max_tag: "Error: You exceeded the maximum tag limit."
+msg_err_file:    "Error: Could not write to target file."
+// BLOCK 4 — BEHAVIOR
+// The logic flow for the system engine.
+FLOW_START:
+
+RENDER interface using labels from BLOCK 3.
+
+PRE-FILL 'Tags' field with {setting_default_tags}.
+ON_SUBMIT (url_input, tag_input):
+
+VALIDATE 'url_input':
+IF empty -> DISPLAY {msg_err_no_url} AND STOP.
+
+PROCESS 'tag_input':
+SPLIT string by comma.
+TRIM whitespace from each tag.
+COUNT tags.
+IF count > {setting_max_tags} -> DISPLAY {msg_err_max_tag} AND STOP.
+JOIN tags using ", ".
+
+GENERATE timestamp:
+IF {setting_timestamp_fmt} is not "none" -> GET current time formatted.
+ELSE -> SET timestamp to empty string.
+
+FORMAT entry line:
+FORMAT = {setting_list_bullet} + "[" + timestamp + "] " + url_input + {setting_separator} + processed_tags.
+(Ensure consistent spacing around separator).
+
+FILE I/O:
+OPEN {setting_target_filename}.
+IF {setting_sort_order} == "newest-top":
+INSERT entry line at line 1.
+ELSE:
+APPEND entry line to end of file.
+SAVE file.
+
+CLEANUP:
+DISPLAY {msg_success}.
+IF {setting_auto_clear} is true -> CLEAR all input fields.
+ELSE -> Keep fields populated.
+FLOW_END
+// BLOCK 5 — HUMAN NOTES
+// Ideas, TODOs, and scratchpad for future iterations.
+[TODO] Add a knob to toggle "Markdown Mode" (formatting the https://www.google.com/search?q=URL as Title).
+[TODO] Create a "Favorite Tags" quick-select list in the UI to avoid typing.
+[IDEA] Future integration: Auto-fetch the page title if the user is online.
+[NOTE] Currently only supports local file writing. Cloud sync needs an external wrapper.
+[FIX] If timestamp is disabled, remove the brackets [] from the output format to keep it clean.
