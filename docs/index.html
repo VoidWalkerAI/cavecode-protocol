@@ -2,427 +2,689 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CaveCode Protocol</title>
+  <title>CaveCode Protocol — SageWire Syndicate</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="CaveCode is a plain-text protocol that lets humans on phones and AIs on servers share the same map of a system."
-  />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="CaveCode — a plain-text blueprint language for humans and AIs to co-forge systems, tools, utilities, and games." />
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-panel: #020617;
+      --bg-card: #020617;
+      --border-soft: #1e293b;
+      --border-strong: #334155;
+      --accent: #f97316;
+      --accent-soft: rgba(249,115,22,0.12);
+      --accent-soft-2: rgba(249,115,22,0.05);
+      --accent-strong: #fb923c;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --text-faint: #6b7280;
+      --danger: #f97373;
+      --ok: #22c55e;
+      --shadow-soft: 0 18px 40px rgba(15,23,42,0.85);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --code-bg: #020617;
+      --chip-bg: #020617;
+      --chip-border: #1e293b;
+      --link-hover: #f97316;
+      --glyph-size: 1.1rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #111827 0, #020617 55%) fixed;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+    a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-soft);
+      background: linear-gradient(
+        to bottom,
+        rgba(15,23,42,0.9),
+        rgba(15,23,42,0.7),
+        transparent
+      );
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.85rem 1.1rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background:
+        radial-gradient(circle at 30% 10%, #f97316 0, transparent 55%),
+        radial-gradient(circle at 75% 80%, #0ea5e9 0, transparent 60%),
+        #020617;
+      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), 0 16px 40px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .brand-mark span {
+      transform: translateY(1px);
+    }
+
+    .brand-text-title {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .brand-text-sub {
+      font-size: 0.86rem;
+      color: var(--text-faint);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+    .nav-links a {
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-color: rgba(148,163,184,0.35);
+      background: rgba(15,23,42,0.85);
+      text-decoration: none;
+    }
+
+    .nav-pill-main {
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(249,115,22,0.4);
+      background: radial-gradient(circle at top, rgba(249,115,22,0.18), transparent 65%);
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.75rem 1.1rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+
+    .hero {
+      padding: 1.4rem 1.4rem 1.5rem;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at top left, rgba(248,113,113,0.12), transparent 55%),
+        radial-gradient(circle at top right, rgba(59,130,246,0.16), transparent 60%),
+        var(--bg-panel);
+      border: 1px solid rgba(55,65,81,0.85);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.9);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 0.95rem;
+    }
+    .hero-tagline span.glyph {
+      font-size: 1rem;
+    }
+
+    h1.hero-title {
+      font-size: clamp(1.85rem, 2.4vw, 2.25rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      max-width: 32rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-bullets {
+      list-style: none;
+      display: grid;
+      grid-template-columns: minmax(0,1fr);
+      gap: 0.2rem;
+      margin-bottom: 1.3rem;
+      font-size: 0.9rem;
+    }
+
+    .hero-bullets li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      color: var(--text-soft);
+    }
+
+    .hero-bullets li span.marker {
+      font-size: 0.75rem;
+      color: var(--accent-strong);
+      transform: translateY(2px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+      background: none;
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      border-color: rgba(248,113,113,0.5);
+      background: radial-gradient(circle at top left, rgba(248,113,113,0.32), transparent 65%);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.75);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.9);
+      border-color: rgba(248,113,113,0.8);
+    }
+
+    .btn-outline {
+      border-color: rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.85);
+    }
+    .btn-outline:hover {
+      border-color: rgba(248,250,252,0.5);
+      background: rgba(15,23,42,1);
+    }
+
+    .btn span.icon {
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+
+    .hero-meta-pill {
+      padding: 0.2rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .hero-meta-pill strong {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    .glyph-card {
+      padding: 1.1rem 1.1rem 1.15rem;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at top, rgba(56,189,248,0.1), transparent 55%),
+        var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .glyph-card h2 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .glyph-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
+      font-size: 0.87rem;
+    }
+
+    .glyph-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 10px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid var(--border-soft);
+    }
+
+    .glyph-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .glyph-icon {
+      font-size: var(--glyph-size);
+    }
+
+    .glyph-label {
+      font-weight: 500;
+    }
+
+    .glyph-note {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    .glyph-chip {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.55rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--chip-border);
+      background: var(--chip-bg);
+      color: var(--text-soft);
+    }
+
+    .card-section {
+      margin-top: 0.6rem;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 0.7rem;
+    }
+
+    .card-section h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-faint);
+      margin-bottom: 0.4rem;
+    }
+
+    .link-list {
+      list-style: none;
+      display: grid;
+      gap: 0.3rem;
+      font-size: 0.83rem;
+    }
+
+    .link-list li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .link-list li span.icon {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-soft);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-faint);
+    }
+
+    .pill.ok {
+      border-color: rgba(34,197,94,0.6);
+      color: var(--ok);
+    }
+
+    .pill.warn {
+      border-color: rgba(234,179,8,0.7);
+      color: #facc15;
+    }
+
+    .pill.danger {
+      border-color: rgba(248,113,113,0.8);
+      color: var(--danger);
+    }
+
+    .footer-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.1rem 1.5rem;
+      border-top: 1px solid var(--border-soft);
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-shell a {
+      color: var(--text-soft);
+    }
+
+    .footer-shell a:hover {
+      color: var(--link-hover);
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-shell {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding: 1.15rem 1rem 1.35rem;
+      }
+      .glyph-card {
+        padding: 1rem 0.95rem 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="logo">
-        <span class="logo-glyph">🪨</span>
-        <span class="logo-text">CaveCode</span>
+  <div class="page">
+    <header>
+      <div class="nav-shell">
+        <div class="brand">
+          <div class="brand-mark">
+            <span>🪨</span>
+          </div>
+          <div>
+            <div class="brand-text-title">CAVECODE PROTOCOL</div>
+            <div class="brand-text-sub">A SageWire Syndicate Specification</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <div class="nav-pill-main">v1.1 · Living Standard</div>
+          <a href="../README.md">Spec</a>
+          <a href="../MULTI_ENGINE.md">Multi-Engine Log</a>
+          <a href="../teaching/micro-teaching-pack.md">Micro Pack</a>
+          <a href="../teaching/full-teaching-pack.md">Full Pack</a>
+        </div>
       </div>
-      <nav class="nav">
-        <a href="#what">What</a>
-        <a href="#why">Why</a>
-        <a href="#quickstart">Quick Start</a>
-        <a href="#examples">Examples</a>
-        <a href="#spec">Spec</a>
-        <a href="#tools">Tools</a>
-        <a href="#philosophy">Philosophy</a>
-      </nav>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1>CaveCode Protocol</h1>
-          <p class="tagline">
-            A plain-text protocol for <strong>humans on phones</strong> and
-            <strong>AIs on servers</strong> to share the same blueprint.
+    <main>
+      <section class="shell">
+        <!-- Left: Hero / Intro -->
+        <div class="hero">
+          <div class="hero-tagline">
+            <span class="glyph">🔥</span>
+            <span>Plain-text blueprints for humans and AIs</span>
+          </div>
+
+          <h1 class="hero-title">The CaveCode Protocol</h1>
+          <p class="hero-subtitle">
+            A human-readable, AI-shapable blueprint format for describing tools,
+            utilities, games, and systems — safely — even on a phone.
           </p>
-          <p class="subtagline">
-            One file. Clear blocks. Safe knobs.  
-            A small window for people to look in and see the future of code.
-          </p>
+
+          <ul class="hero-bullets">
+            <li>
+              <span class="marker">▸</span>
+              <span>Humans always know <strong>where to edit</strong>. AIs know what must stay locked.</span>
+            </li>
+            <li>
+              <span class="marker">▸</span>
+              <span>Works across engines: OpenAI, Claude, Gemini, Perplexity, LLaMA & beyond.</span>
+            </li>
+            <li>
+              <span class="marker">▸</span>
+              <span>Describes <em>systems</em>, not just data — behavior, knobs, UI, and notes.</span>
+            </li>
+          </ul>
 
           <div class="hero-actions">
-            <a href="#quickstart" class="btn primary">Get Started</a>
-            <a href="https://github.com/VoidWalkerAI/cavecode-protocol"
-               class="btn ghost" target="_blank" rel="noopener noreferrer">
-              View on GitHub
+            <a class="btn btn-primary" href="../README.md">
+              <span class="icon">📜</span>
+              <span>Read the CaveCode Spec</span>
+            </a>
+            <a class="btn btn-outline" href="../MULTI_ENGINE.md">
+              <span class="icon">🧪</span>
+              <span>View Multi-Engine Compliance</span>
             </a>
           </div>
 
-          <p class="meta">
-            Stewarded by <strong>SageWire Syndicate</strong> via
-            <strong>VoidWalkerAI</strong>.
-          </p>
+          <div class="hero-meta">
+            <div class="hero-meta-pill">
+              <span>🧱</span>
+              <span><strong>Blocks:</strong> Identity · Knobs · Public Text · Behavior · Notes</span>
+            </div>
+            <div class="hero-meta-pill">
+              <span>🌐</span>
+              <span><strong>Use:</strong> games, tools, UIs, flows, research artifacts</span>
+            </div>
+          </div>
         </div>
 
-        <aside class="hero-card">
-          <h2>Standard Glyphs</h2>
-          <ul class="glyph-list">
-            <li>🪨 Locked Block — core rules, engine logic</li>
-            <li>🖍 Human Edit Zone — safe knobs &amp; messages</li>
-            <li>⚡ Expandable Block — hooks &amp; power-ups</li>
-            <li>🎮 Game Logic Block — inputs, ticks, scoring</li>
-            <li>🌐 Public-Safe Block — text for screens &amp; docs</li>
-          </ul>
-          <p class="hero-note">
-            If you can find these symbols, you can navigate the file.
-          </p>
+        <!-- Right: Glyph Legend + Links -->
+        <aside class="glyph-card">
+          <h2>Glyph Legend · v1.1</h2>
+
+          <div class="glyph-grid">
+            <div class="glyph-row">
+              <div class="glyph-left">
+                <span class="glyph-icon">🪨</span>
+                <div>
+                  <div class="glyph-label">STRUCTURE / SHELL</div>
+                  <div class="glyph-note">Block 1 — IDENTITY (locked, no AI rewrites)</div>
+                </div>
+              </div>
+              <div class="glyph-chip">Core</div>
+            </div>
+
+            <div class="glyph-row">
+              <div class="glyph-left">
+                <span class="glyph-icon">🎚️</span>
+                <div>
+                  <div class="glyph-label">TUNING KNOBS</div>
+                  <div class="glyph-note">Human-editable parameters (names stay stable)</div>
+                </div>
+              </div>
+              <div class="glyph-chip">Human edit zone</div>
+            </div>
+
+            <div class="glyph-row">
+              <div class="glyph-left">
+                <span class="glyph-icon">🌐</span>
+                <div>
+                  <div class="glyph-label">PUBLIC TEXT</div>
+                  <div class="glyph-note">UI labels, dialog, copy — safe for humans to change</div>
+                </div>
+              </div>
+              <div class="glyph-chip">Visible strings</div>
+            </div>
+
+            <div class="glyph-row">
+              <div class="glyph-left">
+                <span class="glyph-icon">🔧</span>
+                <div>
+                  <div class="glyph-label">BEHAVIOR / FLOW</div>
+                  <div class="glyph-note">Logic, game loop, or procedural steps</div>
+                </div>
+              </div>
+              <div class="glyph-chip">Engine logic</div>
+            </div>
+
+            <div class="glyph-row">
+              <div class="glyph-left">
+                <span class="glyph-icon">📝</span>
+                <div>
+                  <div class="glyph-label">HUMAN NOTES</div>
+                  <div class="glyph-note">Ideas, TODOs, scratch — AIs preserve, humans append</div>
+                </div>
+              </div>
+              <div class="glyph-chip">Design log</div>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <h3>Core Documents</h3>
+            <ul class="link-list">
+              <li>
+                <a href="../README.md">
+                  <span class="icon">📜</span>
+                  <span>CaveCode Spec · Root README</span>
+                </a>
+              </li>
+              <li>
+                <a href="../teaching/micro-teaching-pack.md">
+                  <span class="icon">📘</span>
+                  <span>Micro Teaching Pack · For engine prompts</span>
+                </a>
+              </li>
+              <li>
+                <a href="../teaching/full-teaching-pack.md">
+                  <span class="icon">📚</span>
+                  <span>Full Teaching Pack · For serious generators</span>
+                </a>
+              </li>
+              <li>
+                <a href="../MULTI_ENGINE.md">
+                  <span class="icon">🧪</span>
+                  <span>Multi-Engine Compliance Log · Live scoreboard</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-section">
+            <h3>Engine Status (Snapshot)</h3>
+            <div class="pill-row">
+              <span class="pill ok">OpenAI (Ash) · Reference</span>
+              <span class="pill ok">Gemini · v1.1 structural pass</span>
+              <span class="pill warn">More engines: pending</span>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <h3>Artifact Folders</h3>
+            <ul class="link-list">
+              <li>
+                <a href="../artifacts/gemini/">
+                  <span class="icon">🟣</span>
+                  <span>Gemini Artifacts</span>
+                </a>
+              </li>
+              <li>
+                <span class="icon">⚪</span>
+                <span>Claude, Perplexity, LLaMA · (coming online)</span>
+              </li>
+            </ul>
+          </div>
         </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-shell">
+        <div>© <span id="year"></span> SageWire Syndicate · CaveCode Protocol v1.1</div>
+        <div>Forged for humans with phones · and AIs who listen.</div>
       </div>
-    </section>
+    </footer>
+  </div>
 
-    <!-- What -->
-    <section id="what" class="section">
-      <div class="container">
-        <h2>What is CaveCode?</h2>
-        <p>
-          CaveCode is a <strong>plain-text format</strong> for describing systems:
-          games, tools, teaching materials, configuration files, narrative flows,
-          and more. It is <strong>not a programming language</strong>. It sits
-          beside the code you already have and makes it legible.
-        </p>
-        <p>
-          A CaveCode file is organized into labeled <strong>BLOCKS</strong>.
-          Each block groups related ideas or parameters and carries at least one
-          glyph to signal its role. The file can be read and edited on any device,
-          including a small phone screen.
-        </p>
-
-        <div class="pill-grid">
-          <div class="pill">
-            <h3>Plain Text</h3>
-            <p>
-              UTF-8 text files you can open anywhere. No special editor required.
-            </p>
-          </div>
-          <div class="pill">
-            <h3>Block-Mapped</h3>
-            <p>
-              Clear sections labeled as BLOCK&nbsp;1, BLOCK&nbsp;2, etc., so
-              humans and AI agents can both see the map.
-            </p>
-          </div>
-          <div class="pill">
-            <h3>Glyph-Marked</h3>
-            <p>
-              Emojis act as semantic markers. You always know what is safe to
-              touch and what is dangerous to break.
-            </p>
-          </div>
-          <div class="pill">
-            <h3>Culture-Friendly</h3>
-            <p>
-              Space for story, philosophy, and teaching notes in the same
-              document as the technical description.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why -->
-    <section id="why" class="section alt">
-      <div class="container">
-        <h2>Why CaveCode?</h2>
-        <p>
-          Most code bases are written for machines and experts. CaveCode is
-          written for <strong>everyone else</strong>:
-        </p>
-        <ul class="bullet-list">
-          <li>
-            A person on a phone can tweak difficulty, messages, and settings
-            without touching engine code.
-          </li>
-          <li>
-            AI agents can generate, refactor, and validate files without guessing
-            where the important knobs live.
-          </li>
-          <li>
-            Teachers and designers can share artifacts that read like
-            <em>design docs</em> instead of tangled source files.
-          </li>
-          <li>
-            Studios can standardize on a single format for
-            <strong>specs, configs, and public documentation</strong>.
-          </li>
-        </ul>
-        <p>
-          CaveCode is meant to be <strong>small, durable, and remixable</strong>:
-          a protocol you can still read in twenty years.
-        </p>
-      </div>
-    </section>
-
-    <!-- Quick Start -->
-    <section id="quickstart" class="section">
-      <div class="container">
-        <h2>Quick Start</h2>
-        <div class="grid-two">
-          <div>
-            <h3>1. Create a CaveCode file</h3>
-            <p>
-              Make a new text file and give it an extension such as
-              <code>.cavecode</code> or <code>.txt</code>.
-            </p>
-            <pre class="code-block"><code>=====================================
-🪨 BLOCK 1 — SHELL
-=====================================
-
-Title: Hello World (CaveCode)
-Short Description:
-  A minimal example showing how to structure a CaveCode file.
-
-Goal:
-  🌐 Show the basic use of glyphs and blocks.</code></pre>
-          </div>
-
-          <div>
-            <h3>2. Mark safe knobs</h3>
-            <p>
-              Add a <span class="glyph-inline">🖍</span> block for things
-              non-coders can safely edit.
-            </p>
-            <pre class="code-block"><code>=====================================
-🖍 BLOCK 3 — TUNING KNOBS
-=====================================
-
-HELLO_TEXT:        "Hello, CaveCode."
-INTERACTION_TEXT:  "You just interacted with a CaveCode artifact."</code></pre>
-          </div>
-        </div>
-
-        <div class="grid-two">
-          <div>
-            <h3>3. Add public-safe text</h3>
-            <p>
-              Use <span class="glyph-inline">🌐</span> blocks for UI text,
-              descriptions, and anything safe to display in public.
-            </p>
-          </div>
-          <div>
-            <h3>4. Run the validator</h3>
-            <p>
-              Use the reference validator to check basic structure:
-            </p>
-            <pre class="code-block"><code>python tools/validator/validate_cavecode.py path/to/file.cavecode</code></pre>
-          </div>
-        </div>
-
-        <p class="note">
-          You can find a full “Hello World” example in the repo under
-          <code>/examples/hello-world/hello-world.cavecode</code>.
-        </p>
-      </div>
-    </section>
-
-    <!-- Examples -->
-    <section id="examples" class="section alt">
-      <div class="container">
-        <h2>Examples</h2>
-        <p>
-          Official public examples live in the GitHub repository and are kept
-          in sync with the spec.
-        </p>
-
-        <div class="card-grid">
-          <article class="card">
-            <h3>Hello World</h3>
-            <p>
-              The smallest complete CaveCode artifact. Shows the core block
-              structure, glyph use, and safe tuning knobs.
-            </p>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/examples/hello-world"
-              target="_blank" rel="noopener noreferrer"
-              class="card-link"
-            >View Hello World</a>
-          </article>
-
-          <article class="card">
-            <h3>Runner Config</h3>
-            <p>
-              A configuration-only artifact for a simple endless runner.
-              Designers can change speed, gravity, spawn rates, and lives
-              without touching JS code.
-            </p>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/examples/runner-config"
-              target="_blank" rel="noopener noreferrer"
-              class="card-link"
-            >View Runner Config</a>
-          </article>
-
-          <article class="card">
-            <h3>Founding Card</h3>
-            <p>
-              The original founding declaration for the CaveCode Arcade Planet:
-              a living game hall and education system built entirely with
-              CaveCode artifacts.
-            </p>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/founding"
-              target="_blank" rel="noopener noreferrer"
-              class="card-link"
-            >Read the Founding Card</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Spec & Governance -->
-    <section id="spec" class="section">
-      <div class="container">
-        <h2>Specification &amp; Governance</h2>
-        <p>
-          CaveCode v1.0 is defined in a small set of documents inside the
-          <code>/specs</code> folder of the GitHub repository.
-        </p>
-
-        <ul class="link-list">
-          <li>
-            <strong>Core Spec:</strong>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-spec-v1.0.md"
-              target="_blank" rel="noopener noreferrer"
-            >cavecode-spec-v1.0.md</a>
-            — overview, core elements, compliance rules.
-          </li>
-          <li>
-            <strong>Block Structure:</strong>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-block-and-structure.md"
-              target="_blank" rel="noopener noreferrer"
-            >cavecode-block-and-structure.md</a>
-            — how to organize blocks and numbering.
-          </li>
-          <li>
-            <strong>Glyphs &amp; Crayons:</strong>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-glyphs-and-crayons.md"
-              target="_blank" rel="noopener noreferrer"
-            >cavecode-glyphs-and-crayons.md</a>
-            — meanings of the standard symbols.
-          </li>
-          <li>
-            <strong>Governance:</strong>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/blob/main/specs/cavecode-governance.md"
-              target="_blank" rel="noopener noreferrer"
-            >cavecode-governance.md</a>
-            — stewardship, versioning, and change principles.
-          </li>
-        </ul>
-
-        <p class="note">
-          SageWire Syndicate (through VoidWalkerAI) acts as the
-          <strong>primary steward</strong> of the protocol.
-          Outside contributors are encouraged to propose improvements via
-          issues and pull requests.
-        </p>
-      </div>
-    </section>
-
-    <!-- Tools -->
-    <section id="tools" class="section alt">
-      <div class="container">
-        <h2>Tools &amp; Badges</h2>
-
-        <div class="grid-two">
-          <div>
-            <h3>Validator (Reference Tool)</h3>
-            <p>
-              A simple Python script lives under
-              <code>/tools/validator/validate_cavecode.py</code>.
-              It performs heuristic checks on CaveCode artifacts:
-            </p>
-            <ul class="bullet-list">
-              <li>Detects BLOCK headers</li>
-              <li>Checks for standard glyph usage</li>
-              <li>Warns about obviously empty blocks</li>
-            </ul>
-            <p>
-              It is intentionally small and easy to read, so you can fork it and
-              adapt it to your own workflow.
-            </p>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/tools/validator"
-              target="_blank" rel="noopener noreferrer"
-              class="card-link"
-            >Open Validator Folder</a>
-          </div>
-
-          <div>
-            <h3>Badges</h3>
-            <p>
-              Projects that use CaveCode can embed SVG badges in their README
-              files to signal support or compliance.
-            </p>
-            <ul class="bullet-list">
-              <li>
-                <strong>CaveCode Compliant</strong> — follows the v1.0 spec.
-              </li>
-              <li>
-                <strong>CaveCode Inside</strong> — uses CaveCode internally for
-                architecture, configs, or teaching.
-              </li>
-            </ul>
-            <a
-              href="https://github.com/VoidWalkerAI/cavecode-protocol/tree/main/badges"
-              target="_blank" rel="noopener noreferrer"
-              class="card-link"
-            >View Badge Assets</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Philosophy -->
-    <section id="philosophy" class="section">
-      <div class="container">
-        <h2>Philosophy</h2>
-        <p>
-          CaveCode is built on a simple belief:
-          <strong>the bottleneck is not engineering, it is communication.</strong>
-        </p>
-        <p>
-          A rancher on a hillside with a phone, a student in a crowded lab, a
-          designer in a noisy café, and an AI in a datacenter should all be able
-          to look at the same file and understand the shape of a system.
-        </p>
-        <p>
-          That is what CaveCode is for:
-        </p>
-        <ul class="bullet-list">
-          <li>A shared map between humans and machines.</li>
-          <li>A safe space to tweak, learn, and teach.</li>
-          <li>A protocol that can live longer than any single framework.</li>
-        </ul>
-        <p>
-          If you build something with CaveCode, you are invited to add it to the
-          public library, share your patterns, and help grow the next thousand
-          artifacts.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>
-        🪨 CaveCode Protocol v1.0 • Stewarded by SageWire Syndicate / VoidWalkerAI
-      </p>
-      <p class="footer-links">
-        <a href="https://github.com/VoidWalkerAI/cavecode-protocol"
-           target="_blank" rel="noopener noreferrer">
-          GitHub Repository
-        </a>
-        <span>·</span>
-        <a href="#top">Back to top</a>
-      </p>
-    </div>
-  </footer>
+  <script>
+    // set year softly
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
