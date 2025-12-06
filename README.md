@@ -16,6 +16,24 @@ multiple engines (OpenAI, Claude, Gemini, etc.) can speak a shared standard
 It is not a programming language.
 It sits beside the code as a structured description: numbered blocks with clear labels, emoji glyphs, and a dedicated human edit zone.
 
+### 🧭 Why CaveCode Exists
+
+Other formats (YAML, JSON, Markdown) describe data.
+
+CaveCode describes **systems** in a way both humans and AIs can safely modify, remix, and extend — even on a phone.
+
+CaveCode was built so:
+
+- humans always know where to edit  
+- AIs never overwrite protected sections  
+- structure is visible at a glance (even on mobile)  
+- multiple engines (OpenAI, Claude, Gemini, local models) can speak one shared standard  
+- artifacts can be audited, validated, and versioned without confusion  
+
+CaveCode is not a programming language.  
+It is the **meta-layer beside code**, giving shape to tools, worlds, games, logic, UI, and documentation.
+
+It is the shared language of the Forge.
 
 ---
 
@@ -81,3 +99,25 @@ From the repo root:
 python tools/scaffold/cavecode_new_card.py "My Artifact Name" my-artifact-folder
 
 This will create a valid, ready-to-edit .cavecode file with full block structure.
+
+### 🛣️ Roadmap
+
+**v1.1 (current)**
+- Core spec (SHELL, BEHAVIOR, KNOBS, PUBLIC TEXT, HUMAN NOTES)
+- Minimal + strict validators
+- Scaffold tool for generating new cards
+- Example artifacts from multiple AIs
+
+**v1.2**
+- Official linter / normalizer for misaligned cards
+- Schema definitions for custom blocks
+- Automatic card formatter for mobile devices
+
+**v2.0**
+- Plug-in block system
+- CaveCode-to-code generators (“From card to CLI / app / module”)
+- Multi-AI compliance suite  
+- Formal submission guidelines for 3rd-party engines
+
+CaveCode will continue to grow as more humans and AIs contribute artifacts and refinements.
+
