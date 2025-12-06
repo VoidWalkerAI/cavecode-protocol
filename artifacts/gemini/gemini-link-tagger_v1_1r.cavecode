@@ -1,0 +1,94 @@
++------------------------------------------------+
+|  CAVECODE ARTIFACT — GEMINI LINK TAGGER (v1.1) |
++------------------------------------------------+
+|  A plain-text blueprint for URL logging        |
+|  Engine: Gemini (raw CaveCode test, normalized)|
++------------------------------------------------+
+
+// 🪨 BLOCK 1 — IDENTITY [LOCKED]
+// AIs: Do not modify this block.
+ID:       gemini-link-tagger-001
+TITLE:    Gemini Link Tagger
+PURPOSE:  A minimalist tool to capture URLs with context tags and timestamps into a flat file.
+AUDIENCE: Researchers, developers, and knowledge workers on mobile devices.
+VERSION:  1.1.0
+AUTHOR:   Gemini (Google), normalized via CaveCode v1.1
+
+// 🎚️ BLOCK 2 — TUNING KNOBS
+// Humans: Edit these values to change how the tool behaves.
+setting_target_filename: "links.md"      # The file where links get saved
+setting_timestamp_fmt:   "YYYY-MM-DD"    # Format for the date prefix (or "none")
+setting_sort_order:      "newest-top"    # Options: "newest-top", "oldest-bottom"
+setting_list_bullet:     "- "            # The bullet or list marker (e.g. "* ", "- ", "1. ")
+setting_separator:       " :: "          # Divider between URL and tags in the output
+setting_max_tags:        5               # Maximum number of tags allowed per entry
+setting_default_tags:    "read-later"    # Pre-filled tag suggestion
+setting_auto_clear:      true            # Reset fields after successful save?
+
+// 🌐 BLOCK 3 — PUBLIC TEXT
+// Visible labels and messages for the user interface.
+ui_header:       "Quick Link Logger"
+ui_label_url:    "Paste Link:"
+ui_label_tags:   "Tags (comma separated):"
+ui_btn_submit:   "Log Link"
+ui_btn_cancel:   "Clear"
+
+msg_success:     "Link captured successfully."
+msg_err_no_url:  "Error: The URL field cannot be empty."
+msg_err_max_tag: "Error: You exceeded the maximum tag limit."
+msg_err_file:    "Error: Could not write to target file."
+
+// 🔧 BLOCK 4 — BEHAVIOR
+// The logic flow for the system / engine.
+FLOW_START:
+  * RENDER interface using labels from BLOCK 3.
+  * PRE-FILL "Tags" field with {setting_default_tags}.
+
+ON_SUBMIT (url_input, tag_input):
+  * VALIDATE url_input:
+    - IF empty -> DISPLAY {msg_err_no_url} AND STOP.
+
+  * PROCESS tag_input:
+    - SPLIT string by comma.
+    - TRIM whitespace from each tag.
+    - REMOVE any empty tags.
+    - COUNT tags.
+    - IF count > {setting_max_tags} -> DISPLAY {msg_err_max_tag} AND STOP.
+    - JOIN tags using ", " -> processed_tags.
+
+  * GENERATE timestamp:
+    - IF {setting_timestamp_fmt} is not "none":
+        GET current time formatted using {setting_timestamp_fmt} -> ts_value.
+        SET timestamp_part = "[" + ts_value + "] "
+      ELSE:
+        SET timestamp_part = "".
+
+  * FORMAT entry line:
+    - entry_line = {setting_list_bullet} + timestamp_part + url_input +
+                   {setting_separator} + processed_tags
+
+  * FILE I/O (implementation-dependent):
+    - OPEN {setting_target_filename}.
+    - IF {setting_sort_order} == "newest-top":
+        INSERT entry_line at the top of the file (line 1).
+      ELSE:
+        APPEND entry_line to the end of the file.
+    - SAVE file.
+    - IF any file error occurs -> DISPLAY {msg_err_file} AND STOP.
+
+  * CLEANUP:
+    - DISPLAY {msg_success}.
+    - IF {setting_auto_clear} is true:
+        CLEAR all input fields (URL + tags).
+      ELSE:
+        LEAVE current values in place.
+
+FLOW_END
+
+// 📝 BLOCK 5 — HUMAN NOTES
+// Ideas, TODOs, and scratchpad for future iterations.
+[TODO] Add a knob to toggle "Markdown Mode" (formatting the URL as [Title](URL)).
+[TODO] Create a "Favorite Tags" quick-select list in the UI to avoid typing.
+[IDEA] Future integration: Auto-fetch the page title if the user is online.
+[NOTE] Currently only supports local file writing. Cloud sync needs an external wrapper.
+[FIX] If timestamp is disabled, omit the brackets [] entirely to keep the output format clean.
