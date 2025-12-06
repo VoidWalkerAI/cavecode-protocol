@@ -1,0 +1,32 @@
++------------------------------------------+
+| CAVECODE ARTIFACT — HOMEPAGE (v1.0)     |
++------------------------------------------+
+
+// BLOCK 1 — IDENTITY [LOCKED]
+TITLE: CaveCode Homepage
+PURPOSE: Describe the public GitHub Pages front door.
+VERSION: 1.0
+AUDIENCE: Visitors + engines
+
+// BLOCK 2 — TUNING KNOBS
+hero_title: "The CaveCode Protocol"
+hero_subtitle: "A human-readable, AI-shapable blueprint format..."
+primary_cta_label: "Read the CaveCode Spec"
+secondary_cta_label: "View Multi-Engine Compliance"
+
+// BLOCK 3 — PUBLIC TEXT
+nav_spec_label: "Spec"
+nav_log_label: "Multi-Engine Log"
+nav_micro_pack_label: "Micro Pack"
+nav_full_pack_label: "Full Pack"
+
+// BLOCK 4 — BEHAVIOR
+FLOW_START:
+ - Render hero with hero_title + hero_subtitle.
+ - Display primary + secondary CTAs.
+ - Show glyph legend card on the right.
+
+FLOW_END
+
+// BLOCK 5 — HUMAN NOTES
+[TODO] Add “Arcade Planet” link when first games go live.
