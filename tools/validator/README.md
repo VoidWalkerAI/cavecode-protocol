@@ -101,3 +101,6 @@ These validators are intentionally simple so they can be adapted by teams, teach
 If you extend the CaveCode protocol, you may also extend the validator to align with your custom blocks or glyphs.
 
 Additional validators can be added in this folder (e.g., v1.2 with auto-fix mode).
+
+---
+🪨 Generated & Maintained by the CaveCode Protocol Team
