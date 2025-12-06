@@ -1,0 +1,802 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Link Harvester</title>  <script>
+
+/*
+███████████████████████████████████████████████████████████████
+█ CAVECODE ARTIFACT — LINK HARVESTER (v1.0)                   █
+███████████████████████████████████████████████████████████████
+
+Built with CaveCode Protocol v1.0
+https://github.com/VoidWalkerAI/cavecode-arcade-planet
+
+========================================
+BLOCK 1 — IDENTITY (Locked — AI will not rewrite)
+
+Title: Link Harvester
+Purpose:
+Download chat transcripts from links and save them as organized
+markdown files. Auto-numbered, timestamped, and sorted by project
+or date. Built for mobile-first archiving.
+
+For: The citizens of Emberwake who need to preserve their conversations.
+*/
+
+/*
+
+🖍️ BLOCK 2 — HUMAN EDIT ZONE (Safe to change)
+
+Edit these values to customize the harvester.
+*/
+
+// === NAMING SETTINGS ===
+const AUTO_NUMBER_START = 1;          // Starting number for chats
+const INCLUDE_TIMESTAMP = true;       // Add date/time to filename
+const DATE_FORMAT = 'YYYY-MM-DD';     // Date format in filename
+const TIME_FORMAT = 'HH-MM';          // Time format in filename
+
+// === PROJECT SETTINGS ===
+const DEFAULT_PROJECTS = [
+'CaveCode',
+'Threshold Monitor',
+'EmberVox',
+'Emberwake',
+'General Chats'
+];
+
+// === FILENAME SETTINGS ===
+const FILENAME_PREFIX = 'chat';        // Prefix before number
+const FILENAME_SEPARATOR = '_';        // Between parts (e.g., chat_001_date)
+const FILE_EXTENSION = '.md';          // File extension
+
+// === STORAGE SETTINGS ===
+const SAVE_COUNTER_TO_STORAGE = true;  // Remember last number used
+const ORGANIZE_BY_MONTH = true;        // Include month in organization
+
+/*
+
+🌐 BLOCK 3 — PUBLIC TEXT (Safe to edit)
+
+Change any text that appears in the app.
+*/
+
+const UI_TEXT = {
+TITLE: 'Link Harvester',
+SUBTITLE: 'Archive your conversations. Keep your knowledge.',
+
+LABEL_CHAT_URL: 'Chat URL',  
+PLACEHOLDER_URL: 'Paste your chat link here...',  
+  
+LABEL_PROJECT: 'Project / Category',  
+PLACEHOLDER_PROJECT: 'Select or type project name...',  
+  
+LABEL_CUSTOM_NAME: 'Custom Name (Optional)',  
+PLACEHOLDER_CUSTOM_NAME: 'Override auto-naming...',  
+  
+BUTTON_HARVEST: '📥 Harvest Chat',  
+BUTTON_PREVIEW: '👁️ Preview',  
+BUTTON_CLEAR: '🗑️ Clear',  
+BUTTON_HISTORY: '📋 View History',  
+  
+STATUS_FETCHING: '⏳ Fetching chat...',  
+STATUS_PROCESSING: '⚙️ Processing...',  
+STATUS_READY: '✅ Ready to download',  
+STATUS_ERROR: '❌ Error',  
+STATUS_IDLE: 'Paste a link to begin',  
+  
+HELP_TEXT: 'Paste a chat link, select a project, and harvest.',  
+HISTORY_TITLE: 'Harvest History',  
+HISTORY_EMPTY: 'No chats harvested yet.',  
+  
+ERROR_INVALID_URL: 'Please enter a valid URL',  
+ERROR_FETCH_FAILED: 'Could not fetch chat content',  
+ERROR_NO_CONTENT: 'No content found in chat'
+
+};
+
+/*
+
+🪨 BLOCK 4 — LOCKED LOGIC (Core application code)
+
+Stable logic that should not be modified casually.
+*/
+</script>
+
+<style>  
+    /* Visual styling - mobile-first design */  
+    :root {  
+        --bg-primary: #0a0e14;  
+        --bg-secondary: #151b24;  
+        --bg-tertiary: #1f2937;  
+        --text-primary: #e6edf3;  
+        --text-secondary: #9ca3af;  
+        --border: #374151;  
+        --accent: #10b981;  
+        --accent-hover: #059669;  
+        --danger: #ef4444;  
+        --warning: #f59e0b;  
+    }  
+
+    * {  
+        margin: 0;  
+        padding: 0;  
+        box-sizing: border-box;  
+    }  
+
+    body {  
+        font-family: 'Courier New', monospace;  
+        background: var(--bg-primary);  
+        color: var(--text-primary);  
+        line-height: 1.6;  
+        padding: 20px;  
+        min-height: 100vh;  
+    }  
+
+    .container {  
+        max-width: 800px;  
+        margin: 0 auto;  
+    }  
+
+    header {  
+        text-align: center;  
+        margin-bottom: 40px;  
+        padding-bottom: 20px;  
+        border-bottom: 2px solid var(--border);  
+    }  
+
+    h1 {  
+        font-size: 1.8rem;  
+        margin-bottom: 10px;  
+        color: var(--accent);  
+        text-transform: uppercase;  
+        letter-spacing: 2px;  
+    }  
+
+    .subtitle {  
+        color: var(--text-secondary);  
+        font-size: 0.9rem;  
+        font-style: italic;  
+    }  
+
+    .main-panel {  
+        background: var(--bg-secondary);  
+        border: 2px solid var(--border);  
+        border-radius: 8px;  
+        padding: 30px;  
+        margin-bottom: 20px;  
+    }  
+
+    .form-group {  
+        margin-bottom: 25px;  
+    }  
+
+    label {  
+        display: block;  
+        margin-bottom: 8px;  
+        color: var(--text-secondary);  
+        font-size: 0.9rem;  
+        font-weight: bold;  
+        text-transform: uppercase;  
+        letter-spacing: 1px;  
+    }  
+
+    input, select, textarea {  
+        width: 100%;  
+        padding: 12px;  
+        background: var(--bg-tertiary);  
+        border: 1px solid var(--border);  
+        border-radius: 4px;  
+        color: var(--text-primary);  
+        font-family: inherit;  
+        font-size: 1rem;  
+    }  
+
+    input:focus, select:focus, textarea:focus {  
+        outline: none;  
+        border-color: var(--accent);  
+    }  
+
+    textarea {  
+        min-height: 100px;  
+        resize: vertical;  
+    }  
+
+    .button-group {  
+        display: grid;  
+        grid-template-columns: 1fr 1fr;  
+        gap: 10px;  
+        margin-top: 20px;  
+    }  
+
+    button {  
+        padding: 14px 20px;  
+        background: var(--accent);  
+        color: white;  
+        border: none;  
+        border-radius: 4px;  
+        cursor: pointer;  
+        font-family: inherit;  
+        font-size: 1rem;  
+        font-weight: bold;  
+        transition: all 0.2s;  
+        text-transform: uppercase;  
+        letter-spacing: 1px;  
+    }  
+
+    button:hover {  
+        background: var(--accent-hover);  
+        transform: translateY(-2px);  
+    }  
+
+    button:active {  
+        transform: translateY(0);  
+    }  
+
+    button.secondary {  
+        background: var(--bg-tertiary);  
+    }  
+
+    button.secondary:hover {  
+        background: #374151;  
+    }  
+
+    button.danger {  
+        background: var(--danger);  
+    }  
+
+    button.danger:hover {  
+        background: #dc2626;  
+    }  
+
+    button.primary {  
+        grid-column: 1 / -1;  
+        background: var(--accent);  
+        font-size: 1.1rem;  
+        padding: 16px;  
+    }  
+
+    button:disabled {  
+        opacity: 0.5;  
+        cursor: not-allowed;  
+        transform: none !important;  
+    }  
+
+    .status-bar {  
+        background: var(--bg-tertiary);  
+        border: 1px solid var(--border);  
+        border-radius: 4px;  
+        padding: 12px;  
+        margin-top: 20px;  
+        text-align: center;  
+        font-weight: bold;  
+    }  
+
+    .status-idle { color: var(--text-secondary); }  
+    .status-fetching { color: var(--warning); }  
+    .status-ready { color: var(--accent); }  
+    .status-error { color: var(--danger); }  
+
+    .help-text {  
+        background: var(--bg-tertiary);  
+        border-left: 3px solid var(--accent);  
+        padding: 15px;  
+        margin-bottom: 20px;  
+        color: var(--text-secondary);  
+        font-size: 0.9rem;  
+    }  
+
+    .history-panel {  
+        display: none;  
+        background: var(--bg-secondary);  
+        border: 2px solid var(--border);  
+        border-radius: 8px;  
+        padding: 30px;  
+        margin-top: 20px;  
+    }  
+
+    .history-panel.active {  
+        display: block;  
+    }  
+
+    .history-item {  
+        background: var(--bg-tertiary);  
+        border: 1px solid var(--border);  
+        border-radius: 4px;  
+        padding: 15px;  
+        margin-bottom: 10px;  
+    }  
+
+    .history-item-header {  
+        display: flex;  
+        justify-content: space-between;  
+        align-items: center;  
+        margin-bottom: 8px;  
+    }  
+
+    .history-filename {  
+        font-weight: bold;  
+        color: var(--accent);  
+    }  
+
+    .history-timestamp {  
+        font-size: 0.85rem;  
+        color: var(--text-secondary);  
+    }  
+
+    .history-project {  
+        color: var(--text-secondary);  
+        font-size: 0.9rem;  
+    }  
+
+    .counter-display {  
+        text-align: center;  
+        padding: 20px;  
+        background: var(--bg-tertiary);  
+        border-radius: 4px;  
+        margin-top: 20px;  
+    }  
+
+    .counter-display .number {  
+        font-size: 3rem;  
+        color: var(--accent);  
+        font-weight: bold;  
+    }  
+
+    .counter-display .label {  
+        color: var(--text-secondary);  
+        font-size: 0.9rem;  
+        margin-top: 5px;  
+    }  
+
+    @media (max-width: 600px) {  
+        h1 {  
+            font-size: 1.5rem;  
+        }  
+
+        .main-panel {  
+            padding: 20px;  
+        }  
+
+        .button-group {  
+            grid-template-columns: 1fr;  
+        }  
+
+        button.primary {  
+            grid-column: 1;  
+        }  
+    }  
+</style>
+
+</head>  
+<body>  
+    <div class="container">  
+        <header>  
+            <h1 id="mainTitle">📥 Link Harvester</h1>  
+            <p class="subtitle" id="subtitle">Archive your conversations. Keep your knowledge.</p>  
+        </header>  <div class="help-text" id="helpText">  
+        Paste a chat link, select a project, and harvest.  
+    </div>  
+
+    <div class="main-panel">  
+        <div class="form-group">  
+            <label for="chatUrl" id="labelUrl">Chat URL</label>  
+            <input   
+                type="url"   
+                id="chatUrl"   
+                placeholder="Paste your chat link here..."  
+            >  
+        </div>  
+
+        <div class="form-group">  
+            <label for="projectSelect" id="labelProject">Project / Category</label>  
+            <select id="projectSelect">  
+                <option value="">Select or type below...</option>  
+            </select>  
+            <input   
+                type="text"   
+                id="projectInput"   
+                placeholder="Or type custom project name..."  
+                style="margin-top: 10px;"  
+            >  
+        </div>  
+
+        <div class="form-group">  
+            <label for="customName" id="labelCustomName">Custom Name (Optional)</label>  
+            <input   
+                type="text"   
+                id="customName"   
+                placeholder="Override auto-naming..."  
+            >  
+        </div>  
+
+        <div class="button-group">  
+            <button class="primary" onclick="harvestChat()" id="btnHarvest">  
+                📥 Harvest Chat  
+            </button>  
+            <button class="secondary" onclick="previewMarkdown()" id="btnPreview">  
+                👁️ Preview  
+            </button>  
+            <button class="secondary" onclick="toggleHistory()" id="btnHistory">  
+                📋 View History  
+            </button>  
+            <button class="danger" onclick="clearForm()" id="btnClear">  
+                🗑️ Clear  
+            </button>  
+        </div>  
+
+        <div class="status-bar status-idle" id="statusBar">  
+            Paste a link to begin  
+        </div>  
+
+        <div class="counter-display">  
+            <div class="number" id="counterNumber">000</div>  
+            <div class="label">Next Chat Number</div>  
+        </div>  
+    </div>  
+
+    <div class="history-panel" id="historyPanel">  
+        <h2 style="margin-bottom: 20px; color: var(--accent);" id="historyTitle">  
+            Harvest History  
+        </h2>  
+        <div id="historyList">  
+            <p style="color: var(--text-secondary); text-align: center;">  
+                No chats harvested yet.  
+            </p>  
+        </div>  
+    </div>  
+</div>  
+
+<script>  
+    /*   
+    ========================================  
+    🪨 LOCKED LOGIC (Core application code)  
+    ========================================  
+    */  
+
+    // Apply UI text from CaveCode  
+    function applyUIText() {  
+        document.getElementById('mainTitle').textContent = '📥 ' + UI_TEXT.TITLE;  
+        document.getElementById('subtitle').textContent = UI_TEXT.SUBTITLE;  
+        document.getElementById('helpText').textContent = UI_TEXT.HELP_TEXT;  
+        document.getElementById('labelUrl').textContent = UI_TEXT.LABEL_CHAT_URL;  
+        document.getElementById('labelProject').textContent = UI_TEXT.LABEL_PROJECT;  
+        document.getElementById('labelCustomName').textContent = UI_TEXT.LABEL_CUSTOM_NAME;  
+        document.getElementById('chatUrl').placeholder = UI_TEXT.PLACEHOLDER_URL;  
+        document.getElementById('projectInput').placeholder = UI_TEXT.PLACEHOLDER_PROJECT;  
+        document.getElementById('customName').placeholder = UI_TEXT.PLACEHOLDER_CUSTOM_NAME;  
+        document.getElementById('btnHarvest').textContent = UI_TEXT.BUTTON_HARVEST;  
+        document.getElementById('btnPreview').textContent = UI_TEXT.BUTTON_PREVIEW;  
+        document.getElementById('btnHistory').textContent = UI_TEXT.BUTTON_HISTORY;  
+        document.getElementById('btnClear').textContent = UI_TEXT.BUTTON_CLEAR;  
+        document.getElementById('historyTitle').textContent = UI_TEXT.HISTORY_TITLE;  
+        document.getElementById('statusBar').textContent = UI_TEXT.STATUS_IDLE;  
+    }  
+
+    // State  
+    let chatCounter = AUTO_NUMBER_START;  
+    let harvestHistory = [];  
+
+    // Load state from localStorage  
+    function loadState() {  
+        const savedCounter = localStorage.getItem('chatCounter');  
+        const savedHistory = localStorage.getItem('harvestHistory');  
+          
+        if (savedCounter && SAVE_COUNTER_TO_STORAGE) {  
+            chatCounter = parseInt(savedCounter);  
+        }  
+          
+        if (savedHistory) {  
+            harvestHistory = JSON.parse(savedHistory);  
+        }  
+          
+        updateCounterDisplay();  
+    }  
+
+    // Save state  
+    function saveState() {  
+        if (SAVE_COUNTER_TO_STORAGE) {  
+            localStorage.setItem('chatCounter', chatCounter.toString());  
+        }  
+        localStorage.setItem('harvestHistory', JSON.stringify(harvestHistory));  
+    }  
+
+    // Update counter display  
+    function updateCounterDisplay() {  
+        document.getElementById('counterNumber').textContent =   
+            chatCounter.toString().padStart(3, '0');  
+    }  
+
+    // Populate project dropdown  
+    function populateProjects() {  
+        const select = document.getElementById('projectSelect');  
+        DEFAULT_PROJECTS.forEach(project => {  
+            const option = document.createElement('option');  
+            option.value = project;  
+            option.textContent = project;  
+            select.appendChild(option);  
+        });  
+    }  
+
+    // Get current timestamp  
+    function getTimestamp() {  
+        const now = new Date();  
+        const year = now.getFullYear();  
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');  
+        const day = now.getDate().toString().padStart(2, '0');  
+        const hours = now.getHours().toString().padStart(2, '0');  
+        const minutes = now.getMinutes().toString().padStart(2, '0');  
+          
+        let dateStr = DATE_FORMAT  
+            .replace('YYYY', year)  
+            .replace('MM', month)  
+            .replace('DD', day);  
+              
+        let timeStr = TIME_FORMAT  
+            .replace('HH', hours)  
+            .replace('MM', minutes);  
+              
+        return { date: dateStr, time: timeStr, full: now };  
+    }  
+
+    // Generate filename  
+    function generateFilename(customName = null) {  
+        if (customName) {  
+            return customName + FILE_EXTENSION;  
+        }  
+          
+        const parts = [FILENAME_PREFIX];  
+        parts.push(chatCounter.toString().padStart(3, '0'));  
+          
+        if (INCLUDE_TIMESTAMP) {  
+            const { date, time } = getTimestamp();  
+            parts.push(date);  
+            parts.push(time);  
+        }  
+          
+        return parts.join(FILENAME_SEPARATOR) + FILE_EXTENSION;  
+    }  
+
+    // Update status  
+    function updateStatus(message, type = 'idle') {  
+        const statusBar = document.getElementById('statusBar');  
+        statusBar.textContent = message;  
+        statusBar.className = 'status-bar status-' + type;  
+    }  
+
+    // Validate URL  
+    function isValidUrl(string) {  
+        try {  
+            new URL(string);  
+            return true;  
+        } catch (_) {  
+            return false;  
+        }  
+    }  
+
+    // Mock fetch chat content (placeholder)  
+    async function fetchChatContent(url) {  
+        // Note: Due to CORS and security restrictions, we can't actually fetch  
+        // arbitrary URLs from client-side JavaScript. This is a limitation.  
+        // In a real implementation, this would need a backend proxy.  
+          
+        updateStatus(UI_TEXT.STATUS_FETCHING, 'fetching');  
+          
+        // Simulate delay  
+        await new Promise(resolve => setTimeout(resolve, 1000));  
+          
+        // For now, return a template with instructions  
+        return `# Chat Archive
+
+Original URL: ${url}
+
+Downloaded: ${new Date().toLocaleString()}
+
+
+---
+
+Important Note
+
+Due to browser security restrictions, this tool cannot automatically fetch chat content from external URLs.
+
+To archive your chat:
+
+1. Open the chat URL in your browser
+
+
+2. Copy the entire conversation text
+
+
+3. Come back here and paste it into the preview area
+
+
+4. Click "Harvest Chat" to download
+
+
+
+
+---
+
+Chat Content
+
+[Paste your chat content here]
+
+`;
+}
+
+// Convert to markdown  
+    function convertToMarkdown(content) {  
+        // Basic markdown formatting  
+        // In a full implementation, this would parse the chat format properly  
+        return content;  
+    }  
+
+    // Download file  
+    function downloadMarkdown(content, filename) {  
+        const blob = new Blob([content], { type: 'text/markdown' });  
+        const url = URL.createObjectURL(blob);  
+        const a = document.createElement('a');  
+        a.href = url;  
+        a.download = filename;  
+        document.body.appendChild(a);  
+        a.click();  
+        document.body.removeChild(a);  
+        URL.revokeObjectURL(url);  
+    }  
+
+    // Harvest chat  
+    async function harvestChat() {  
+        const urlInput = document.getElementById('chatUrl').value.trim();  
+        const projectSelect = document.getElementById('projectSelect').value;  
+        const projectInput = document.getElementById('projectInput').value.trim();  
+        const customName = document.getElementById('customName').value.trim();  
+          
+        // Validate  
+        if (!urlInput) {  
+            updateStatus(UI_TEXT.ERROR_INVALID_URL, 'error');  
+            return;  
+        }  
+          
+        if (!isValidUrl(urlInput)) {  
+            updateStatus(UI_TEXT.ERROR_INVALID_URL, 'error');  
+            return;  
+        }  
+          
+        const project = projectInput || projectSelect || 'General Chats';  
+          
+        try {  
+            // Fetch content  
+            const content = await fetchChatContent(urlInput);  
+              
+            if (!content) {  
+                updateStatus(UI_TEXT.ERROR_NO_CONTENT, 'error');  
+                return;  
+            }  
+              
+            updateStatus(UI_TEXT.STATUS_PROCESSING, 'fetching');  
+              
+            // Convert to markdown  
+            const markdown = convertToMarkdown(content);  
+              
+            // Generate filename  
+            const filename = generateFilename(customName);  
+              
+            // Add project prefix if organizing by project  
+            const fullFilename = project !== 'General Chats'   
+                ? `${project.replace(/\s+/g, '-')}_${filename}`  
+                : filename;  
+              
+            // Download  
+            downloadMarkdown(markdown, fullFilename);  
+              
+            // Record in history  
+            const { full } = getTimestamp();  
+            harvestHistory.unshift({  
+                filename: fullFilename,  
+                project: project,  
+                url: urlInput,  
+                timestamp: full.toISOString(),  
+                number: chatCounter  
+            });  
+              
+            // Increment counter  
+            chatCounter++;  
+            updateCounterDisplay();  
+            saveState();  
+              
+            updateStatus(UI_TEXT.STATUS_READY, 'ready');  
+              
+            // Update history display if visible  
+            if (document.getElementById('historyPanel').classList.contains('active')) {  
+                renderHistory();  
+            }  
+              
+        } catch (error) {  
+            console.error('Harvest error:', error);  
+            updateStatus(UI_TEXT.ERROR_FETCH_FAILED, 'error');  
+        }  
+    }  
+
+    // Preview markdown  
+    async function previewMarkdown() {  
+        const urlInput = document.getElementById('chatUrl').value.trim();  
+          
+        if (!urlInput || !isValidUrl(urlInput)) {  
+            updateStatus(UI_TEXT.ERROR_INVALID_URL, 'error');  
+            return;  
+        }  
+          
+        try {  
+            const content = await fetchChatContent(urlInput);  
+            const markdown = convertToMarkdown(content);  
+              
+            // Open in new window for preview  
+            const win = window.open('', 'Preview');  
+            win.document.write('<pre style="font-family: monospace; padding: 20px; background: #1a1a1a; color: #e0e0e0;">');  
+            win.document.write(markdown.replace(/</g, '&lt;').replace(/>/g, '&gt;'));  
+            win.document.write('</pre>');  
+              
+            updateStatus('Preview opened in new window', 'ready');  
+        } catch (error) {  
+            updateStatus(UI_TEXT.ERROR_FETCH_FAILED, 'error');  
+        }  
+    }  
+
+    // Clear form  
+    function clearForm() {  
+        document.getElementById('chatUrl').value = '';  
+        document.getElementById('projectSelect').value = '';  
+        document.getElementById('projectInput').value = '';  
+        document.getElementById('customName').value = '';  
+        updateStatus(UI_TEXT.STATUS_IDLE, 'idle');  
+    }  
+
+    // Toggle history panel  
+    function toggleHistory() {  
+        const panel = document.getElementById('historyPanel');  
+        panel.classList.toggle('active');  
+          
+        if (panel.classList.contains('active')) {  
+            renderHistory();  
+        }  
+    }  
+
+    // Render history  
+    function renderHistory() {  
+        const list = document.getElementById('historyList');  
+          
+        if (harvestHistory.length === 0) {  
+            list.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No chats harvested yet.</p>';  
+            return;  
+        }  
+          
+        list.innerHTML = harvestHistory.map(item => {  
+            const date = new Date(item.timestamp);  
+            return `  
+                <div class="history-item">  
+                    <div class="history-item-header">  
+                        <span class="history-filename">${item.filename}</span>  
+                        <span class="history-timestamp">${date.toLocaleString()}</span>  
+                    </div>  
+                    <div class="history-project">Project: ${item.project}</div>  
+                </div>  
+            `;  
+        }).join('');  
+    }  
+
+    // Initialize  
+    applyUIText();  
+    populateProjects();  
+    loadState();  
+
+    // Auto-save on input  
+    document.getElementById('chatUrl').addEventListener('input', () => {  
+        if (document.getElementById('statusBar').classList.contains('status-error')) {  
+            updateStatus(UI_TEXT.STATUS_IDLE, 'idle');  
+        }  
+    });  
+</script>
+
+</body>  
+</html>  
