@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cobra Commander — Supreme Leader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        /* 🧱 BLOCK 1 — IDENTITY [LOCKED] */
+        :root {
+            --cobra-red: #cc0000;
+            --cobra-gold: #d4af37;
+            --cobra-black: #0a0a0a;
+            --cobra-silver: #e8e8e8;
+            --cobra-glow: rgba(204, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--cobra-black) 0%, #1a0a0a 50%, #330000 100%);
+            color: var(--cobra-silver);
+            font-family: 'Orbitron', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, var(--cobra-glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 95vw;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .helm {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: var(--cobra-red);
+            text-shadow: 
+                0 0 20px var(--cobra-red),
+                0 0 40px var(--cobra-red),
+                0 0 60px var(--cobra-gold),
+                3px 3px 0 var(--cobra-black);
+            margin-bottom: 1rem;
+            font-family: 'Audiowide', sans-serif;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .serpent-icon {
+            font-size: 4rem;
+            margin: 1rem 0;
+            filter: drop-shadow(0 0 15px var(--cobra-red));
+            animation: slither 4s ease-in-out infinite;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: var(--cobra-gold);
+            letter-spacing: 0.1em;
+            margin: 1rem 0;
+            font-weight: 300;
+            text-shadow: 0 0 10px var(--cobra-gold);
+        }
+
+        .threat-level {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .threat-bar {
+            width: 8px;
+            height: 40px;
+            background: var(--cobra-red);
+            box-shadow: 0 0 10px var(--cobra-red), inset 0 0 5px var(--cobra-gold);
+            animation: threat-pulse 0.5s ease-in-out infinite;
+        }
+
+        .threat-bar:nth-child(2) { animation-delay: 0.1s; }
+        .threat-bar:nth-child(3) { animation-delay: 0.2s; }
+        .threat-bar:nth-child(4) { animation-delay: 0.3s; }
+        .threat-bar:nth-child(5) { animation-delay: 0.4s; }
+
+        .doctrine {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 2px solid var(--cobra-gold);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 2px;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+            line-height: 1.8;
+            box-shadow: 
+                inset 0 0 20px rgba(212, 175, 55, 0.1),
+                0 0 20px var(--cobra-glow);
+        }
+
+        .doctrine-title {
+            color: var(--cobra-red);
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--cobra-red);
+            color: var(--cobra-silver);
+            border: 2px solid var(--cobra-gold);
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--cobra-red);
+            font-size: clamp(0.7rem, 2vw, 1rem);
+        }
+
+        .btn:hover {
+            background: var(--cobra-gold);
+            color: var(--cobra-black);
+            box-shadow: 
+                0 0 30px var(--cobra-gold),
+                0 0 60px var(--cobra-red);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px var(--cobra-red),
+                    0 0 40px var(--cobra-red),
+                    0 0 60px var(--cobra-gold),
+                    3px 3px 0 var(--cobra-black);
+            }
+            50% {
+                text-shadow: 
+                    0 0 30px var(--cobra-red),
+                    0 0 60px var(--cobra-red),
+                    0 0 100px var(--cobra-gold),
+                    5px 5px 0 var(--cobra-black);
+            }
+        }
+
+        @keyframes slither {
+            0%, 100% {
+                transform: translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(-8px) rotate(-2deg);
+            }
+            75% {
+                transform: translateX(8px) rotate(2deg);
+            }
+        }
+
+        @keyframes threat-pulse {
+            0%, 100% {
+                opacity: 1;
+                height: 40px;
+            }
+            50% {
+                opacity: 0.6;
+                height: 50px;
+            }
+        }
+        /* END BLOCK 1 */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="helm">⚔ COBRA ⚔</div>
+        <div class="serpent-icon">🐍</div>
+        <div class="tagline">SILENCE = FEAR</div>
+
+        <div class="threat-level">
+            <div class="threat-bar"></div>
+            <div class="threat-bar"></div>
+            <div class="threat-bar"></div>
+            <div class="threat-bar"></div>
+            <div class="threat-bar"></div>
+        </div>
+
+        <div class="doctrine">
+            <div class="doctrine-title">SUPREME LEADER MANIFESTO</div>
+            <p>
+                In the shadows where lesser minds falter,<br>
+                a serpent coils. Patient. Methodical. Unstoppable.<br>
+                <br>
+                COBRA COMMANDER does not shout—the world listens to silence.<br>
+                Does not rush—victory is a slow venom through the veins.<br>
+                Does not hesitate—calculation IS the weapon.<br>
+                <br>
+                Your fear is our victory.<br>
+                Your resistance is our inevitability.<br>
+                Your defeat has already begun.
+            </p>
+        </div>
+
+        <div class="control-panel">
+            <button class="btn" onclick="commandVoice()">⚡ EXECUTE COMMAND</button>
+            <button class="btn" onclick="raiseArmy()">🐲 ASSEMBLE FORCES</button>
+            <button class="btn" onclick="strikeFear()">💀 STRIKE FEAR</button>
+            <button class="btn" onclick="baronessSpeak()" style="background: #8b00ff; box-shadow: 0 0 15px #8b00ff;">👑 BARONESS SPEAKS</button>
+        </div>
+    </div>
+
+    <script>
+        // 🖍️ BLOCK 2 — TUNING KNOBS [Human Edit Zone]
+        const VOICE_PITCH = 0.8;
+        const VOICE_SPEED = 0.9;
+        const COMMAND_DELAY = 300;
+        const GLITCH_CHANCE = 0.15;
+        const EASTER_EGG_TAPS = 7;
+        // END BLOCK 2
+
+        // 🌐 BLOCK 3 — PUBLIC TEXT [Human Safe Zone]
+        const TEXT_COMMAND = "COBRA COMMANDER SPEAKS: All resistance is futile. The organization is eternal.";
+        const TEXT_FORCES = "FORCES ASSEMBLING: Ten thousand soldiers await your command.";
+        const TEXT_FEAR = "FEAR DEPLOYED: Your enemies tremble in the darkness.";
+        const TEXT_BARONESS = "THE BARONESS COMMANDS: Beauty and brutality are the same blade. Obey.";
+        const TEXT_EGG_FOUND = "🐍 EASTER EGG UNLOCKED 🐍\nEnter your name to join the Cobra Brotherhood...";
+        // END BLOCK 3
+
+        // 🎮 BLOCK 4 — BEHAVIOR [Logic Engine]
+        function commandVoice() {
+            const utterance = new SpeechSynthesisUtterance(TEXT_COMMAND);
+            utterance.pitch = VOICE_PITCH;
+            utterance.rate = VOICE_SPEED;
+            utterance.volume = 1;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+            triggerGlitch();
+        }
+
+        function raiseArmy() {
+            console.log("🐍 COBRA FORCES ACTIVATED");
+            let count = 0;
+            const interval = setInterval(() => {
+                count++;
+                if (count <= 10) {
+                    console.log(`⚔ Battalion ${count} assembled`);
+                } else {
+                    clearInterval(interval);
+                    const utterance = new SpeechSynthesisUtterance(TEXT_FORCES);
+                    utterance.pitch = VOICE_PITCH - 0.2;
+                    utterance.rate = VOICE_SPEED;
+                    window.speechSynthesis.speak(utterance);
+                    triggerGlitch();
+                }
+            }, COMMAND_DELAY);
+        }
+
+        function strikeFear() {
+            const utterance = new SpeechSynthesisUtterance(TEXT_FEAR);
+            utterance.pitch = VOICE_PITCH - 0.3;
+            utterance.rate = VOICE_SPEED - 0.1;
+            window.speechSynthesis.speak(utterance);
+            triggerScreenShake();
+            triggerGlitch();
+        }
+
+        function baronessSpeak() {
+            const utterance = new SpeechSynthesisUtterance(TEXT_BARONESS);
+            utterance.pitch = VOICE_PITCH + 0.6;
+            utterance.rate = VOICE_SPEED;
+            utterance.volume = 1;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+            triggerGlitch();
+        }
+
+        function triggerGlitch() {
+            if (Math.random() < GLITCH_CHANCE) {
+                document.body.style.filter = 'hue-rotate(15deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'hue-rotate(0deg)';
+                }, 100);
+            }
+        }
+
+        function triggerScreenShake() {
+            const container = document.querySelector('.container');
+            container.style.transform = 'translateX(0)';
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    container.style.transform = `translateX(${i % 2 === 0 ? -5 : 5}px)`;
+                }, i * 50);
+            }
+            setTimeout(() => {
+                container.style.transform = 'translateX(0)';
+            }, 300);
+        }
+
+        console.log("🐍 COBRA COMMANDER SYSTEM ONLINE 🐍");
+        console.log("Doctrine locked. Fear ascending. Victory assured.");
+
+        let cobraTapCount = 0;
+        let cobraBrotherhood = JSON.parse(localStorage.getItem('cobraBrotherhood')) || [];
+
+        function incrementCobraTap() {
+            cobraTapCount++;
+            console.log(`Cobra taps: ${cobraTapCount}/${EASTER_EGG_TAPS}`);
+            if (cobraTapCount === EASTER_EGG_TAPS) {
+                unlockEasterEgg();
+            }
+        }
+
+        function unlockEasterEgg() {
+            cobraTapCount = 0;
+            const name = prompt(TEXT_EGG_FOUND, "Agent Name");
+            if (name && name.trim()) {
+                cobraBrotherhood.push({
+                    name: name.trim(),
+                    date: new Date().toLocaleString()
+                });
+                localStorage.setItem('cobraBrotherhood', JSON.stringify(cobraBrotherhood));
+                alert(`Welcome to the Cobra Brotherhood, ${name}.\nTotal agents: ${cobraBrotherhood.length}`);
+                displayBrotherhood();
+            }
+        }
+
+        function displayBrotherhood() {
+            if (cobraBrotherhood.length > 0) {
+                console.log("🐍 COBRA BROTHERHOOD ROSTER 🐍");
+                cobraBrotherhood.forEach((agent, idx) => {
+                    console.log(`${idx + 1}. ${agent.name} (${agent.date})`);
+                });
+            }
+        }
+
+        document.querySelector('.helm').addEventListener('click', incrementCobraTap);
+        displayBrotherhood();
+        // END BLOCK 4
+
+        // 📝 BLOCK 5 — HUMAN NOTES
+        /*
+            Forge Note:
+            - This is a tribute to Cobra Commander from GI Joe.
+            - Block 1 (IDENTITY) locked: Never touch the HTML structure or main styling.
+            - Block 2 (TUNING KNOBS): Adjust VOICE_PITCH, VOICE_SPEED, COMMAND_DELAY, GLITCH_CHANCE as needed.
+            - Block 3 (PUBLIC TEXT): Change the commands, manifesto, or threat messages here.
+            - Block 4 (BEHAVIOR): Logic for voice, screen effects, glitches. Do not edit unless fixing bugs.
+            - Block 5 (NOTES): This is where you leave messages for the next person.
+            
+            Future enhancements:
+            - Add more command buttons with different sound effects
+            - Implement cursor tracking for serpent movement
+            - Add ambient snake sounds (hiss, slither)
+            - Mobile-optimized touch response
+        */
+        // END BLOCK 5
+    </script>
+
+</body>
+</html>
