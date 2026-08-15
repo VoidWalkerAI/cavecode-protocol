@@ -1,0 +1,617 @@
+============================================================
+CAVECODE-PROTOCOL.cavecode.txt
+CaveCode Protocol — Master Project Map
+============================================================
+
+STATUS:
+Active stabilization
+
+PURPOSE OF THIS FILE:
+
+This is the front door to the CaveCode Protocol repository.
+
+It does NOT replace the ratified CaveCode specification.
+
+The ratified specification defines protocol requirements.
+This file records the current state of the project around that protocol:
+
+- what CaveCode is
+- what is settled
+- what is being worked on
+- what is broken or contradictory
+- why important decisions were made
+- where deeper information lives
+- where the next human or AI should resume work
+
+A person or AI returning to this repository cold should read this file first.
+
+
+============================================================
+🪨 BLOCK 1 — WHAT CAVECODE IS
+============================================================
+
+CaveCode is a plain-text human/AI map for software,
+systems, tools, hardware, games, workflows, and other
+structured projects.
+
+CaveCode is not a programming language.
+
+The implementation tells the machine what to do.
+
+CaveCode helps the human or AI understand:
+
+- what the system is
+- how it is organized
+- what is safe to change
+- what should be protected
+- where important behavior lives
+- what can be expanded
+- what may be exposed publicly
+- what has already been decided
+- what remains unfinished
+- how to resume the work later
+
+CORE PURPOSE:
+
+Make complicated work understandable, editable,
+transferable, and restartable without requiring the
+next person or AI to reconstruct the entire project
+from old conversations.
+
+
+============================================================
+🪨 BLOCK 2 — CANONICAL GLYPH VOCABULARY
+============================================================
+
+The five standard CaveCode glyphs are:
+
+🪨 Locked Block
+    Protected structure, rules, invariants, or material
+    that should not be casually changed.
+
+🖍️ Human Edit Zone
+    Material intentionally safe and accessible for
+    human editing.
+
+🔧 Expandable Block
+    Extensions, future work, optional features,
+    experiments, or intentionally open areas.
+
+🎮 Game Logic Block
+    Behavior, mechanics, flow, processing, state
+    transitions, or other operational logic.
+
+🌐 Public-Safe Block
+    Material intended or approved for public-facing use.
+
+RULE:
+
+These glyphs describe SEMANTIC ROLES.
+
+They do not represent five mandatory positions in a file.
+
+
+============================================================
+🪨 BLOCK 3 — BLOCK MODEL
+============================================================
+
+CaveCode does not have a fixed number of blocks.
+
+Use as many blocks as the artifact requires for clarity.
+
+The five standard glyphs may be reused any number of times.
+
+Example:
+
+🪨 BLOCK 1 — SYSTEM IDENTITY
+🎮 BLOCK 2 — MAIN FLOW
+🎮 BLOCK 3 — ERROR HANDLING
+🖍️ BLOCK 4 — USER SETTINGS
+🖍️ BLOCK 5 — CALIBRATION
+🌐 BLOCK 6 — PUBLIC MESSAGES
+🔧 BLOCK 7 — FUTURE INTEGRATIONS
+🎮 BLOCK 8 — RECOVERY FLOW
+🪨 BLOCK 9 — AUTHORITY RULES
+
+MODEL:
+
+Block number = location / address.
+
+Glyph = semantic role.
+
+Block title = specific subject.
+
+GUIDELINE:
+
+Prefer one primary glyph per block.
+
+If one block contains substantially different semantic roles,
+consider splitting it into multiple blocks instead of making
+the meaning ambiguous.
+
+
+============================================================
+🪨 BLOCK 4 — RESTARTABILITY AND HANDOFF
+============================================================
+
+CaveCode must help solve the START-AND-STOP PROBLEM.
+
+Projects are interrupted.
+
+People forget context.
+
+AI sessions end.
+
+Another human or AI may eventually inherit the work.
+
+A useful CaveCode project should allow someone to return
+later and determine, without reconstructing old conversations:
+
+- What is this?
+- What currently works?
+- What is protected?
+- What may safely be changed?
+- What important decisions are settled?
+- Why were those decisions made?
+- What was tried and failed?
+- What is currently broken?
+- What remains uncertain?
+- What should happen next?
+- Where can deeper information be found?
+
+CaveCode should preserve enough context that work can
+outlive the session, device, AI model, or person that
+originally created it.
+
+
+============================================================
+🪨 BLOCK 5 — PROJECT MEMORY STRUCTURE
+============================================================
+
+CaveCode projects use layered memory.
+
+LAYER 1 — MASTER MAP
+
+    CAVECODE-PROTOCOL.cavecode.txt
+
+    Answers:
+
+    "Where are we now?"
+
+    Contains:
+    - current project state
+    - settled decisions
+    - unresolved questions
+    - known contradictions
+    - resume point
+    - pointers to deeper material
+
+
+LAYER 2 — LOCAL CAVECODE MAPS
+
+    Major subsystems may have their own CaveCode files.
+
+    Examples:
+
+    tools/validator/VALIDATOR.cavecode.txt
+    tools/compiler/COMPILER.cavecode.txt
+    tools/fixer/FIXER.cavecode.txt
+
+    Answers:
+
+    "How does this particular part work?"
+
+
+LAYER 3 — HISTORY
+
+    cavecode-builders-log.md
+    Git commits and repository history
+
+    Answers:
+
+    "How did we get here?"
+
+    Historical records should not be silently rewritten merely
+    because current thinking changes.
+
+    Current maps describe present truth.
+    Historical records preserve the path.
+
+
+============================================================
+🎮 BLOCK 6 — HANDOFF CHECKPOINT
+============================================================
+
+Before intentionally stopping a meaningful work session,
+update the appropriate CaveCode map.
+
+Record, when applicable:
+
+WHAT CHANGED?
+
+WHAT WAS DECIDED?
+
+WHY WAS IT DECIDED?
+
+WHAT WAS TRIED AND FAILED?
+
+WHAT CURRENTLY WORKS?
+
+WHAT IS CURRENTLY BROKEN?
+
+WHAT REMAINS UNCERTAIN?
+
+WHAT FILES OR SUBSYSTEMS WERE AFFECTED?
+
+WHAT SHOULD HAPPEN NEXT?
+
+WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
+
+Do not duplicate Git unnecessarily.
+
+Git records what changed in the files.
+
+CaveCode should preserve the meaning, reasoning,
+state, and handoff information around those changes.
+
+
+============================================================
+🪨 BLOCK 7 — SETTLED DECISIONS
+============================================================
+
+DECISION CC-001
+
+The original five CaveCode glyph meanings remain the
+canonical semantic vocabulary:
+
+🪨 Locked Block
+🖍️ Human Edit Zone
+🔧 Expandable Block
+🎮 Game Logic Block
+🌐 Public-Safe Block
+
+WHY:
+
+They communicate how a human or AI should understand
+and interact with a section.
+
+
+DECISION CC-002
+
+There is no hard maximum number of CaveCode blocks.
+
+WHY:
+
+Different systems require different amounts of structure.
+
+
+DECISION CC-003
+
+Standard glyphs may be reused across multiple blocks.
+
+WHY:
+
+Glyph = semantic role.
+Block number = location.
+Block title = specific subject.
+
+
+DECISION CC-004
+
+Restartability and handoff are first-class CaveCode goals.
+
+WHY:
+
+A project should be resumable after an interruption
+without requiring reconstruction of lost conversation context.
+
+
+DECISION CC-005
+
+CaveCode project memory will use three layers:
+
+1. Master map
+2. Local subsystem maps
+3. Builder's Log + Git history
+
+WHY:
+
+No single memory mechanism is reliable enough by itself.
+
+
+DECISION CC-006
+
+The preferred human-facing CaveCode filename convention is:
+
+    *.cavecode.txt
+
+Examples:
+
+    CAVECODE-PROTOCOL.cavecode.txt
+    FATECASTER.cavecode.txt
+    VALIDATOR.cavecode.txt
+
+WHY:
+
+CaveCode must be readable with ordinary text-reading tools.
+
+The standalone .cavecode extension is not recognized by
+many ordinary mobile applications.
+
+The protocol must not require a dedicated CaveCode application
+merely to read a CaveCode artifact.
+
+A bare .cavecode file may still be used by tools, developers,
+or environments that support it.
+
+The contents remain plain UTF-8 text.
+
+
+============================================================
+🔧 BLOCK 8 — CURRENT REPOSITORY PROBLEMS
+============================================================
+
+KNOWN PROBLEM 1:
+
+The repository contains a stable CaveCode v1.0 specification,
+while the top-level README currently describes v1.1 as current.
+
+
+KNOWN PROBLEM 2:
+
+Existing v1.1 materials disagree with one another about
+block structure and glyph usage.
+
+
+KNOWN PROBLEM 3:
+
+The v1.1 teaching pack, template, scaffold, and strict
+validator do not currently express one consistent protocol.
+
+
+KNOWN PROBLEM 4:
+
+founding/CaveCode_v1_FoundingCard.txt is incorrectly
+identified as the CaveCode founding card.
+
+It is not to be used as authority for defining CaveCode.
+
+Its proper disposition still needs to be determined.
+
+
+KNOWN PROBLEM 5:
+
+The repository documentation currently blurs the difference
+between:
+
+- semantic glyph roles
+- block names
+- mandatory protocol requirements
+- example/template layouts
+
+
+============================================================
+🔧 BLOCK 9 — OPEN QUESTIONS
+============================================================
+
+These questions are NOT settled yet.
+
+- What exactly should CaveCode v1.1 contain?
+
+- Does the current work require v1.1 at all,
+  or can some changes be clarifications to v1.0?
+
+- What is the proper role of HUMAN NOTES?
+
+- Should HUMAN NOTES require a new standard glyph,
+  use an existing glyph, or remain a block convention?
+
+- How should CRAYON / PENCIL / TORCH editing levels
+  fit into the protocol?
+
+- Which requirements should the validator enforce?
+
+- Which rules should remain recommendations rather
+  than compliance requirements?
+
+- What should the compiler produce?
+
+- What should the fixer be allowed to change automatically?
+
+- When does a subsystem deserve its own local
+  CaveCode map?
+
+- Should the repository include an optional lightweight
+  CaveCode viewer for people who want one?
+
+NOTE:
+
+Any viewer must remain optional.
+
+CaveCode itself must remain readable without special software.
+
+
+============================================================
+🖍️ BLOCK 10 — CURRENT WORK / RESUME HERE
+============================================================
+
+CURRENT PROJECT:
+
+CaveCode Protocol stabilization.
+
+
+CURRENT PHASE:
+
+Define and reconcile the protocol before returning
+to downstream projects.
+
+
+COMPLETED IN CURRENT PASS:
+
+- Confirmed original five glyph meanings.
+- Confirmed glyphs are semantic roles.
+- Confirmed glyphs may be reused.
+- Confirmed no hard block-count limit is desired.
+- Established restartability as a core requirement.
+- Established three-layer project memory architecture.
+- Established *.cavecode.txt as the preferred
+  human-facing filename convention.
+- Created the first master CaveCode project map.
+
+
+NEXT ACTION:
+
+Review the existing v1.0 specification, block specification,
+glyph specification, and governance against the settled
+decisions recorded in this map.
+
+Identify each relevant statement as:
+
+KEEP
+CLARIFY
+CHANGE
+REMOVE
+UNRESOLVED
+
+Do not modify tooling until the written protocol contract
+is internally coherent.
+
+
+DO NOT YET:
+
+- redesign the validator
+- redesign the compiler
+- redesign the fixer
+- invent additional standard glyphs
+- declare a new CaveCode version
+- resume Broken Frontier CaveCode mapping
+
+
+============================================================
+🌐 BLOCK 11 — PUBLIC-SAFE SHORT DESCRIPTION
+============================================================
+
+CaveCode is a plain-text human/AI mapping protocol
+for making software and systems easier to understand,
+modify, hand off, and resume.
+
+It uses simple reusable glyphs and labeled blocks to show
+what is protected, what humans may safely edit, where
+behavior lives, what can be expanded, and what is intended
+for public use.
+
+CaveCode sits with or beside the implementation.
+It does not replace the programming language underneath it.
+
+
+============================================================
+🪨 BLOCK 12 — AUTHORITATIVE REFERENCES
+============================================================
+
+CURRENT RATIFIED SPECIFICATION:
+
+specs/cavecode_spec-v1.0.md
+
+
+GLYPH DEFINITIONS:
+
+specs/cavecode-glyphs_and_crayons.md
+
+
+BLOCK STRUCTURE:
+
+specs/cavecode-block-and-structure.md
+
+
+GOVERNANCE:
+
+specs/cavecode-governance.md
+
+
+PROJECT HISTORY / DESIGN CONTEXT:
+
+cavecode-builders-log.md
+
+
+RULE:
+
+If this project map conflicts with a ratified specification,
+the conflict must be explicitly resolved.
+
+This project map must not silently override the protocol.
+
+
+============================================================
+🖍️ BLOCK 13 — HANDOFF SNAPSHOT
+============================================================
+
+DATE:
+
+2026-08-14
+
+
+WHAT CHANGED?
+
+The CaveCode Protocol stabilization effort now has a master
+project map and a defined layered memory structure.
+
+
+WHAT WAS DECIDED?
+
+CC-001 through CC-006 are settled and recorded in Block 7.
+
+
+WHY?
+
+The repository must preserve enough present-state context,
+local subsystem detail, and historical reasoning that a
+human or AI can stop and restart work without losing the
+project's meaning.
+
+
+WHAT CURRENTLY WORKS?
+
+The original five semantic glyph meanings remain usable
+and understandable.
+
+The v1.0 specification provides a stable starting point.
+
+The Builder's Log preserves important historical context.
+
+
+WHAT IS CURRENTLY BROKEN?
+
+The repository contains conflicting v1.1-era conventions.
+
+The top-level README and several v1.1 tools/materials do not
+currently align with one another or cleanly preserve the
+original glyph semantics.
+
+
+WHAT REMAINS UNCERTAIN?
+
+See BLOCK 9 — OPEN QUESTIONS.
+
+
+WHAT SHOULD HAPPEN NEXT?
+
+Audit the four written protocol authority files before
+changing validators, compilers, fixers, templates, or examples.
+
+
+WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
+
+Do not confuse the five glyphs with five mandatory blocks.
+
+There may be any number of blocks.
+
+The same glyph may be reused as often as its semantic role
+is needed.
+
+Do not treat this master map as a replacement for the
+ratified specification.
+
+
+============================================================
+END — CAVECODE-PROTOCOL.cavecode.txt
+============================================================
