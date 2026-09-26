@@ -4,7 +4,7 @@ CaveCode Protocol — Master Project Map
 ============================================================
 
 STATUS:
-STABILIZATION IMPLEMENTED / LOCALLY VERIFIED / AWAITING MERGE
+STABILIZED v1.0 CONTRACT / VERIFIED / ACTIVE
 
 CURRENT DATE:
 2026-09-26
@@ -478,8 +478,10 @@ CaveCode Protocol stabilization.
 
 CURRENT PHASE:
 
-Stabilization implementation complete on the working branch;
-awaiting repository review and merge.
+Stabilization complete and verified.
+
+Begin field adoption of the Repository Master Project Map
+workflow in active CaveCode-managed projects.
 
 
 COMPLETED IN CURRENT PASS:
@@ -503,10 +505,11 @@ COMPLETED IN CURRENT PASS:
 
 NEXT ACTION:
 
-Review the stabilization pull request as one coherent change.
+Field-test the same-commit Master Project Map workflow on an
+active repository such as Broken Frontier or RangeWater.
 
-If accepted, merge it and field-test the project-map workflow
-on an active repository such as Broken Frontier or RangeWater.
+Record any friction as evidence before proposing another
+protocol version.
 
 
 DO NOT YET:
@@ -637,8 +640,8 @@ See BLOCK 9 — OPEN QUESTIONS.
 
 WHAT SHOULD HAPPEN NEXT?
 
-Review and merge the stabilization branch, then field-test the
-same-commit Master Project Map workflow on a live project.
+Field-test the same-commit Master Project Map workflow on a
+live project and record any friction before changing the spec.
 
 
 WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
