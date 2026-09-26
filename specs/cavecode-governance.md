@@ -44,17 +44,21 @@ Once approved, they become:
 
 Any proposed change MUST respect:
 
-1. **Glyph Stability**  
+1. **Glyph Stability**
    The meanings of 🪨, 🖍️, 🔧, 🎮, 🌐 are **not negotiable**.
 
-2. **Human Readability**  
+2. **Human Readability**
    Changes should not make CaveCode harder for non-coders to understand.
 
-3. **Device Agnosticism**  
+3. **Device Agnosticism**
    The protocol must remain implementable on low-power devices and phones.
 
-4. **AI Cooperation**  
+4. **AI Cooperation**
    The format must remain easy for AI agents to read and generate.
+
+5. **Repository Truth**
+   A protocol change is not complete until this repository's Master Project
+   Map describes the resulting state in the same commit.
 
 ---
 
@@ -98,3 +102,16 @@ They are encouraged instead to:
 
 - link back to this repo as the original spec
 - describe their work as “CaveCode-inspired” or “CaveCode-derived”
+
+---
+
+## 7. Ratification and history
+
+Draft documentation, examples, tools, builder logs, and founding declarations
+do not become normative merely by being committed. A protocol rule becomes
+normative when the steward records it in the ratified specification and updates
+the repository Master Project Map.
+
+Historical files remain valuable evidence of how CaveCode developed. When
+history conflicts with the current ratified contract, preserve the history and
+label its authority accurately rather than silently rewriting it.

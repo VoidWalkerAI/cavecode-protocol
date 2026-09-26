@@ -1,5 +1,5 @@
 ========================================
-🧱 BLOCK 1 — SHELL
+🪨 BLOCK 1 — SHELL
 ========================================
 Title: Cave Runner
 Short Description:
@@ -56,7 +56,7 @@ HIGH_SCORE_LABEL:       "High Score"
 RESTART_BUTTON_TEXT:    "Run Again"
 
 ========================================
-📝 BLOCK 5 — HUMAN NOTES
+🖍️ BLOCK 5 — HUMAN NOTES
 ========================================
 - Visual ideas:
     - Dark cave background, subtle parallax.

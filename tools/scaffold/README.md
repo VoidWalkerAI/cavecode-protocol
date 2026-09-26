@@ -1,9 +1,17 @@
-# CaveCode Scaffold — New Card Generator
+# CaveCode v1.0 Scaffold
 
-This tool prints a ready-to-edit CaveCode card to stdout.  
-It outputs a valid CaveCode v1.0 card containing all required blocks.
-
-Usage:
+Print an Artifact Map:
 
 ```bash
-python tools/scaffold/cavecode_new_card.py "My New Game" > my-new-game.cavecode
+python tools/scaffold/cavecode_new_card.py "My Tool" > MY-TOOL.cavecode.txt
+```
+
+Print a Repository Master Project Map:
+
+```bash
+python tools/scaffold/cavecode_new_card.py \
+  --profile project "My Project" > MY-PROJECT.cavecode.txt
+```
+
+The script writes to standard output so mobile, shell, and automation workflows
+can choose the destination. It does not silently create directories or files.

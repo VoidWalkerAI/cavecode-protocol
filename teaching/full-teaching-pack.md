@@ -1,183 +1,116 @@
-# 📘 CaveCode Full Teaching Pack (v1.1)
+# CaveCode Full Teaching Pack (v1.0)
 
-This document teaches engines and humans how to speak CaveCode consistently.
-It enforces structure, prevents drift, and standardizes multi-engine artifacts.
+This pack teaches humans and AI to create CaveCode without turning one useful
+example into a rigid universal layout.
 
----
+## 1. What CaveCode does
 
-# 1. 🪨 Block Architecture
+CaveCode is a plain-text map beside or within a project. It exposes meaning,
+interaction boundaries, project truth, and the next place to resume work.
 
-Every CaveCode artifact contains these blocks in this exact order:
+It is not executable syntax and it does not replace the implementation.
 
----
+## 2. The five canonical glyphs
 
-### 🪨 **BLOCK 1 — IDENTITY (Locked)**  
-AIs must never change anything here.  
-Contains:
-- TITLE  
-- PURPOSE  
-- VERSION  
-- AUDIENCE  
-- AUTHOR  
-- Notes about origin if needed  
+- 🪨 **Locked** — protected identity, rules, invariants, or structure
+- 🖍️ **Human Edit Zone / Crayon** — safe and intended for human editing
+- 🔧 **Expandable** — additions, experiments, future work, or open questions
+- 🎮 **Behavior** — logic, mechanics, flow, processing, or state transitions
+- 🌐 **Public-Safe** — material approved for public-facing use
 
-This block defines *what the artifact is*.
+The crayon is 🖍️. Tuning knobs, operator settings, calibration values, and
+human notes may all use the crayon when they are genuinely human-editable.
 
----
+## 3. Blocks
 
-### 🎚️ **BLOCK 2 — TUNING KNOBS**  
-Human-editable parameters.
-
-Rules:
-- AIs preserve knob names.  
-- AIs must not rewrite identifying metadata.  
-- Humans freely adjust values.  
-- All knobs written as `name: value`.
-
----
-
-### 🌐 **BLOCK 3 — PUBLIC TEXT**  
-Visible UI strings, labels, prompts, dialog.
-
-Rules:
-- Safe for humans to edit anytime.  
-- AIs must preserve structure and field names.  
-- Plain text only.
-
----
-
-### 🔧 **BLOCK 4 — BEHAVIOR**  
-Defines logic, program flow, or system sequence.
-
-Rules:
-- Written as declarative steps.  
-- AIs may expand, but must not break meaning.  
-- Use labels like FLOW_START / FLOW_END.  
-- Subflows allowed.
-
----
-
-### 📝 **BLOCK 5 — HUMAN NOTES**  
-For humans only: ideas, todos, design notes.
-
-Rules:
-- AIs preserve all human notes exactly.  
-- AIs may append new notes *beneath a divider* if requested.
-
----
-
-# 2. 🌀 Glyph Lexicon
-
-Official glyphs:
-
-🪨 structural / wrapper  
-🔧 behavior, flow  
-🎚️ user parameters  
-🌐 public UI text  
-📝 human notes  
-
-Engines must always use these glyphs in headers and lists.
-
----
-
-# 3. 🚫 Drift Prevention Rules
-
-Engines must:
-
-- keep block order  
-- preserve glyphs  
-- keep human notes untouched  
-- never rewrite BLOCK 1  
-- maintain formatting and indentation  
-- generate complete blocks, never partials  
-- avoid hallucinating custom symbols unless requested  
-- ensure example cards always compile under the validator
-
----
-
-# 4. ✔️ Reference Mini-Artifact
-
-```
-+----------------------------------------+
-|  CAVECODE ARTIFACT — COUNTER DEMO (v1) |
-+----------------------------------------+
-
-// BLOCK 1 — IDENTITY [LOCKED]
-TITLE: Counter Demo
-PURPOSE: Show minimal behavior logic
-VERSION: 1.0
-AUDIENCE: Beginners
-
-// BLOCK 2 — TUNING KNOBS
-start_value: 0
-increment:   1
-
-// BLOCK 3 — PUBLIC TEXT
-ui_label: "Counter:"
-ui_button: "Add"
-
-// BLOCK 4 — BEHAVIOR
-FLOW_START:
- - SET counter = start_value.
- - DISPLAY ui_label with counter.
-ON_PRESS:
- - counter = counter + increment.
- - REFRESH UI.
-
-FLOW_END
-
-// BLOCK 5 — HUMAN NOTES
-[IDEA] Add subtract mode.
+```text
+🪨 BLOCK 1 — IDENTITY
+🎮 BLOCK 2 — MAIN FLOW
+🖍️ BLOCK 3 — SAFE SETTINGS
+🖍️ BLOCK 4 — HUMAN NOTES
+🔧 BLOCK 5 — FUTURE WORK
 ```
 
----
+The number is an address, the glyph is a role, and the title is the subject.
+There may be any number of blocks. Glyphs may be reused. Do not force every
+artifact into five blocks or assign meaning solely from block position.
 
-# 5. 🧪 Engine Behavior Guidelines
+## 4. Artifact Map
 
-When producing CaveCode, engines must:
+Use an Artifact Map for one bounded system. Include only the blocks needed to
+make its identity, behavior, boundaries, and safe edit areas plain.
 
-- follow the structure exactly  
-- not invent new blocks unless instructed  
-- use only approved glyphs  
-- maintain clarity and mobile readability  
-- default to explicit, step-listed behavior  
-- prefer declarative descriptions over code  
+```text
+============================================================
+EXAMPLE.cavecode.txt
+Example Monitor — Artifact Map
+============================================================
 
----
+🪨 BLOCK 1 — IDENTITY
+NAME: Example Monitor
+PURPOSE: Alert when a reading crosses a threshold.
 
-# 6. 📄 Formatting Rules
+🖍️ BLOCK 2 — CRAYON SETTINGS
+THRESHOLD: 10
+ALERT_TEXT: "Threshold crossed."
 
-- Width flexible for mobile  
-- Emojis must be preserved  
-- Comments use `//`  
-- Divider lines allowed but not required  
-- Artifact header box recommended but optional  
+🎮 BLOCK 3 — BEHAVIOR
+1. Read the sensor.
+2. Compare the reading with THRESHOLD.
+3. Emit ALERT_TEXT when the threshold is crossed.
 
----
+🔧 BLOCK 4 — FUTURE WORK
+- Add a second sensor.
 
-# 7. 🔧 Best Practices for Engines
+🌐 BLOCK 5 — PUBLIC DESCRIPTION
+A small threshold monitor described with CaveCode.
+```
 
-Engines should:
+## 5. Repository Master Project Map
 
-- request clarification when BLOCK 1 is ambiguous  
-- default to minimalism when uncertain  
-- standardize timestamps to ISO  
-- keep human-edit knobs close to the top for mobile editing  
-- keep PUBLIC TEXT readable at a glance  
+Use a root-level `PROJECT-NAME.cavecode.txt` to manage the entire repository.
+It is read first and remains the source for current project understanding.
 
----
+At minimum it identifies:
 
-# 8. 🧱 Validation Compatibility
+- status, project identity, and purpose
+- authority and deeper sources
+- current project and runtime state
+- settled decisions or protected contracts
+- known problems and open questions
+- current work and exact next action
+- a dated handoff or resume checkpoint
 
-This pack aligns with:
+It may grow as large as the project requires. Subsystem maps may be added when
+they declare their scope and point back to the master.
 
-- CaveCode Spec v1.1  
-- Minimal Validator  
-- Strict Validator  
-- Gemini, Claude, OpenAI, Perplexity engines  
+## 6. Same-commit discipline
 
-Anything produced with this pack should pass strict validation.
+For meaningful project-state work:
 
----
+1. make the implementation change
+2. test it
+3. update the Master Project Map to the resulting truth
+4. commit the implementation, tests, and map together
 
-End of Full Teaching Pack.
+Record planned work as planned. Record deployed work as deployed only after it
+is deployed. The map does not need to predict its own commit hash.
+
+## 7. AI behavior
+
+An AI working under CaveCode should:
+
+- read the repository master map first
+- follow referenced authority before changing protected material
+- honor each glyph's semantic role
+- preserve human notes unless asked to change them
+- update current state and the resume point with meaningful commits
+- expose contradictions rather than silently choosing a convenient history
+- never describe proposed work as completed
+
+## 8. Validation
+
+The validator can check encoding, block headers, canonical glyphs, duplicate
+addresses, and required repository-map sections. It cannot determine whether a
+project claim is true. CaveCode remains a human-readable truth discipline, not
+a substitute for judgment.

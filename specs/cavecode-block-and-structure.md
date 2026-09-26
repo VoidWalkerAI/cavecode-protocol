@@ -1,80 +1,61 @@
 # CaveCode Block Structure (v1.0)
 
-CaveCode organizes a design into **BLOCKS** so humans and AI can see the
-map of the system at a glance.
+CaveCode groups related meaning into labeled blocks that remain readable on a
+phone and locatable by humans or AI.
 
----
+## Required block anatomy
 
-## 🧱 What Is a BLOCK?
+A block header has:
 
-A BLOCK is a labeled section that groups related ideas or parameters.
-
-A BLOCK MUST have:
-
+- one canonical role glyph
+- the word `BLOCK`
+- a numeric or alphanumeric address
 - a clear title
-- a numeric or alpha index (e.g., `BLOCK 1`, `BLOCK 1A`, `BLOCK 2`, …)
-- at least one glyph indicating the role of the block
 
-Example:
+```text
+🪨 BLOCK 1 — SYSTEM IDENTITY
+🎮 BLOCK 2 — MAIN FLOW
+🎮 BLOCK 2A — ERROR RECOVERY
+🖍️ BLOCK 3 — OPERATOR SETTINGS
+🌐 BLOCK 4 — PUBLIC MESSAGES
+🔧 BLOCK 5 — FUTURE INTEGRATIONS
+```
 
-- 🪨 BLOCK 1 — GAME SHELL
-- 🎮 BLOCK 2 — CORE LOOP
-- 🖍️ BLOCK 3 — TUNING KNOBS
+## Meaning
 
----
+- **Address** tells the reader where the block is.
+- **Glyph** tells the reader how to treat it.
+- **Title** tells the reader what it concerns.
 
-## 🔢 Numbering
+Block number does not determine meaning. CaveCode does not require five blocks
+or a fixed order. Use as many blocks as the system needs, and reuse a glyph
+whenever the same semantic role appears again.
 
-Recommended scheme (not strictly enforced, but canonical):
+Prefer one primary role per block. If a section mixes protected rules, safe
+human settings, and future ideas, split it until the interaction boundary is
+clear.
 
-- `BLOCK 1`, `BLOCK 2`, `BLOCK 3`, … → major sections
-- `BLOCK 1A`, `BLOCK 1B` → sub-sections
-- `BLOCK 10` often used as HUMAN NOTES in Founding Card style
+## Artifact Map guidance
 
-Blocks should be:
+A small artifact will often need blocks for:
 
-- easy to scan on a phone
-- short enough to fit in one viewport whenever possible
+- identity or invariants — 🪨
+- behavior or flow — 🎮
+- safe settings or notes — 🖍️
+- public-facing material — 🌐
+- extensions or open work — 🔧
 
----
+This is a useful pattern, not a mandatory five-position schema.
 
-## 🧬 Suggested Minimal Block Set (for small systems)
+## Repository Master Project Map guidance
 
-For simple games or tools, CaveCode v1.0 recommends:
+A repository map may be much larger. Its blocks should expose current truth,
+authority, decisions, runtime state, open questions, current work, next action,
+and handoff checkpoints. Historical checkpoints may be appended so long as the
+current-state and resume sections remain easy to find.
 
-1. 🪨 BLOCK 1 — SHELL / OVERVIEW  
-   Title, short description, goals, high-level rules.
+## Mobile design principle
 
-2. 🎮 BLOCK 2 — CORE LOOP / FLOW  
-   What happens each tick or major step.
-
-3. 🎮 BLOCK 3 — INPUT / CONTROLS  
-   Keys, taps, gestures, or triggers.
-
-4. 🎮 BLOCK 4 — SCORING / STATE  
-   Points, counters, lives, levels.
-
-5. 🖍️ BLOCK 5 — TUNING KNOBS  
-   Speed, colors, spawn rates, limits.
-
-6. 🌐 BLOCK 6 — PLAYER-FACING TEXT  
-   On-screen instructions, messages, credits.
-
-7. 🔧 BLOCK 7+ — EXPANSIONS  
-   Optional modes, powerups, future ideas.
-
-This is a guideline, not a prison.  
-The core requirement is **clarity** for non-coders.
-
----
-
-## 🧠 Design Principle
-
-> A single person on a phone should be able to:
-> read it,  
-> tweak one value,  
-> and feel the difference,  
-> without learning syntax.
-
-If they cannot, consider adding more BLOCKS or moving parameters into
-a dedicated 🖍️ Human Edit Zone.
+> A person on a phone should be able to find the relevant block, understand its
+> role, make an authorized change, and know what happens next without first
+> learning a private syntax.

@@ -1,0 +1,90 @@
+============================================================
+PROJECT-NAME.cavecode.txt
+Project Name — Master Project Map
+CaveCode Read-First Project File
+============================================================
+
+STATUS:
+ACTIVE
+
+PROJECT STATE:
+Describe the current implemented, tested, committed, and deployed state.
+
+PURPOSE OF THIS FILE:
+This is the repository's read-first source for current project understanding
+and current human decisions.
+
+AUTHORITY RULE:
+This map governs current understanding. Deeper ratified contracts govern their
+specific subjects. Reconcile conflicts explicitly, then update this map.
+
+============================================================
+🪨 BLOCK 1 — PROJECT IDENTITY
+============================================================
+
+NAME:
+Project Name
+
+PURPOSE:
+Describe the problem and intended outcome.
+
+============================================================
+🪨 BLOCK 2 — AUTHORITY / PROTECTED CONTRACTS
+============================================================
+
+- List ratified decisions, contracts, and authoritative files.
+
+============================================================
+🎮 BLOCK 3 — CURRENT SYSTEM / RUNTIME STATE
+============================================================
+
+IMPLEMENTED:
+-
+
+TESTED:
+-
+
+DEPLOYED:
+-
+
+============================================================
+🔧 BLOCK 4 — KNOWN PROBLEMS / OPEN QUESTIONS
+============================================================
+
+-
+
+============================================================
+🖍️ BLOCK 5 — CURRENT WORK / RESUME HERE
+============================================================
+
+CURRENTLY WORKING:
+-
+
+NEXT ACTION:
+-
+
+DO NOT YET:
+-
+
+============================================================
+🖍️ BLOCK 6 — HANDOFF SNAPSHOT
+============================================================
+
+DATE:
+YYYY-MM-DD
+
+WHAT CHANGED?
+-
+
+WHAT CURRENTLY WORKS?
+-
+
+WHAT IS CURRENTLY BROKEN?
+-
+
+WHAT SHOULD HAPPEN NEXT?
+-
+
+============================================================
+END
+============================================================

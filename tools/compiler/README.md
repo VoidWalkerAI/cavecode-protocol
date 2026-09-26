@@ -1,42 +1,13 @@
-# 🪨 CaveCode Compiler v1.0  
-**Tools → Compiler**
+# CaveCode Experimental Converters
 
-The CaveCode Compiler is the first official translator that converts
-existing configuration formats into clean, human-friendly CaveCode
-cards.
+These utilities are small demonstrations, not the CaveCode protocol itself.
 
-This tool is not designed for developers.  
-It is designed for **everyday humans** who want to take messy,
-hard-to-edit code and transform it into a readable, editable,
-CaveCode artifact.
+- `cavecode_convert.py` converts a simple JSON, JavaScript-style object, or
+  `KEY=value` configuration into a v1.0 Artifact Map.
+- `cavecode_to_code.py` reads simple settings from an Artifact Map and emits a
+  Hello World-style Python, JavaScript, or Java program.
+- `cavecaode_convert.py` is a compatibility launcher for the historically
+  misspelled filename.
 
----
-
-## 🌐 Purpose
-
-The compiler performs:
-
-1. **Parsing** – reads the input file  
-2. **Classification** – separates knobs, public text, and metadata  
-3. **Generation** – outputs a full `.cavecode` file  
-4. **Preservation** – embeds the original snippet safely in a notes block  
-
-This lets anyone:
-
-- take a JSON object  
-- take a JS config object  
-- take a `.env` style key/value list  
-- take a messy settings block  
-
-…and turn it into a **clean, block-mapped CaveCode card** they
-can read on a phone.
-
----
-
-## 📥 Accepted Input Formats
-
-The compiler currently supports:
-
-### ✔ JSON
-```json
-{ "speed": 6, "jump": 12, "game_over_message": "Try again!" }
+The converters must preserve the five canonical glyph meanings. Generated code
+must be reviewed before use in production.

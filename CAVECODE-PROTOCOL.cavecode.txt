@@ -4,7 +4,10 @@ CaveCode Protocol — Master Project Map
 ============================================================
 
 STATUS:
-Active stabilization
+STABILIZED v1.0 CONTRACT / VERIFIED / ACTIVE
+
+CURRENT DATE:
+2026-09-26
 
 PURPOSE OF THIS FILE:
 
@@ -103,15 +106,15 @@ The five standard glyphs may be reused any number of times.
 
 Example:
 
-🪨 BLOCK 1 — SYSTEM IDENTITY
-🎮 BLOCK 2 — MAIN FLOW
-🎮 BLOCK 3 — ERROR HANDLING
-🖍️ BLOCK 4 — USER SETTINGS
-🖍️ BLOCK 5 — CALIBRATION
-🌐 BLOCK 6 — PUBLIC MESSAGES
-🔧 BLOCK 7 — FUTURE INTEGRATIONS
-🎮 BLOCK 8 — RECOVERY FLOW
-🪨 BLOCK 9 — AUTHORITY RULES
+    🪨 BLOCK 1 — SYSTEM IDENTITY
+    🎮 BLOCK 2 — MAIN FLOW
+    🎮 BLOCK 3 — ERROR HANDLING
+    🖍️ BLOCK 4 — USER SETTINGS
+    🖍️ BLOCK 5 — CALIBRATION
+    🌐 BLOCK 6 — PUBLIC MESSAGES
+    🔧 BLOCK 7 — FUTURE INTEGRATIONS
+    🎮 BLOCK 8 — RECOVERY FLOW
+    🪨 BLOCK 9 — AUTHORITY RULES
 
 MODEL:
 
@@ -347,47 +350,91 @@ or environments that support it.
 The contents remain plain UTF-8 text.
 
 
+DECISION CC-007
+
+A repository managed with CaveCode keeps one root-level
+*.cavecode.txt file as its read-first Master Project Map.
+
+WHY:
+
+The project state must live with the work rather than depend
+on access to an old conversation.
+
+
+DECISION CC-008
+
+The Master Project Map is authoritative for current project
+understanding and current human decisions recorded there.
+
+Deeper ratified contracts remain authoritative for their
+specific subjects. Conflicts must be reconciled explicitly.
+
+
+DECISION CC-009
+
+A meaningful project-state change is incomplete until the
+Master Project Map is updated in the same commit.
+
+WHY:
+
+The repository should be understandable immediately after
+the commit, not after a separate documentation repair.
+
+
+DECISION CC-010
+
+Project maps distinguish planned, implemented, tested,
+committed, deployed, superseded, and rejected states when
+those distinctions matter.
+
+Future work may be forecast, but it must not be described as
+completed before it is true.
+
+
+DECISION CC-011
+
+Subsystem maps are permitted when they declare their scope
+and point back to the repository Master Project Map.
+
+They must not quietly become competing master truths.
+
+
+DECISION CC-012
+
+A Master Project Map must provide a cold-start resume point.
+
+A human or AI without prior chat history should be able to
+determine what the project is, what is true now, what is
+protected, what remains unresolved, and what happens next.
+
+
 ============================================================
 🔧 BLOCK 8 — CURRENT REPOSITORY PROBLEMS
 ============================================================
 
-KNOWN PROBLEM 1:
+RESOLVED IN THE 2026-09-26 STABILIZATION PASS:
 
-The repository contains a stable CaveCode v1.0 specification,
-while the top-level README currently describes v1.1 as current.
+- README returned to the ratified v1.0 foundation.
+- The crayon was restored as 🖍️ everywhere normative.
+- Fixed five-position block doctrine was removed.
+- Artifact Map and Repository Master Project Map profiles
+  were defined.
+- Same-commit Master Project Map discipline was ratified.
+- Teaching packs, templates, examples, scaffold, validator,
+  fixer, converter, and public documentation were aligned.
+- Founding material was labeled historical rather than
+  normative.
+- Automated consistency tests were added.
 
+REMAINING LIMITATIONS:
 
-KNOWN PROBLEM 2:
-
-Existing v1.1 materials disagree with one another about
-block structure and glyph usage.
-
-
-KNOWN PROBLEM 3:
-
-The v1.1 teaching pack, template, scaffold, and strict
-validator do not currently express one consistent protocol.
-
-
-KNOWN PROBLEM 4:
-
-founding/CaveCode_v1_FoundingCard.txt is incorrectly
-identified as the CaveCode founding card.
-
-It is not to be used as authority for defining CaveCode.
-
-Its proper disposition still needs to be determined.
-
-
-KNOWN PROBLEM 5:
-
-The repository documentation currently blurs the difference
-between:
-
-- semantic glyph roles
-- block names
-- mandatory protocol requirements
-- example/template layouts
+- Historical engine artifacts still contain v1.1-era drift.
+  They are intentionally preserved as test evidence.
+- The compatibility validator retains its historical v1.1
+  filename but delegates to the v1.0 validator.
+- Automated validation can verify structure, not whether a
+  project's status claims are truthful.
+- No formal v1.0.1 release tag has been created.
 
 
 ============================================================
@@ -396,33 +443,22 @@ between:
 
 These questions are NOT settled yet.
 
-- What exactly should CaveCode v1.1 contain?
+- Should CRAYON / PENCIL / TORCH remain a teaching metaphor,
+  become optional extension metadata, or stop at CRAYON?
 
-- Does the current work require v1.1 at all,
-  or can some changes be clarifications to v1.0?
+- What additional output, if any, should experimental
+  CaveCode-to-code converters produce?
 
-- What is the proper role of HUMAN NOTES?
+- What objective threshold should trigger a subsystem map?
 
-- Should HUMAN NOTES require a new standard glyph,
-  use an existing glyph, or remain a block convention?
-
-- How should CRAYON / PENCIL / TORCH editing levels
-  fit into the protocol?
-
-- Which requirements should the validator enforce?
-
-- Which rules should remain recommendations rather
-  than compliance requirements?
-
-- What should the compiler produce?
-
-- What should the fixer be allowed to change automatically?
-
-- When does a subsystem deserve its own local
-  CaveCode map?
+- What exact classes of commits are meaningful enough to
+  require a Master Project Map state update?
 
 - Should the repository include an optional lightweight
   CaveCode viewer for people who want one?
+
+- After field review, should this stabilization be tagged
+  v1.0.1 or remain documentation/tooling corrections to v1.0?
 
 NOTE:
 
@@ -442,49 +478,46 @@ CaveCode Protocol stabilization.
 
 CURRENT PHASE:
 
-Define and reconcile the protocol before returning
-to downstream projects.
+Stabilization complete and verified.
+
+Begin field adoption of the Repository Master Project Map
+workflow in active CaveCode-managed projects.
 
 
 COMPLETED IN CURRENT PASS:
 
-- Confirmed original five glyph meanings.
-- Confirmed glyphs are semantic roles.
-- Confirmed glyphs may be reused.
-- Confirmed no hard block-count limit is desired.
-- Established restartability as a core requirement.
-- Established three-layer project memory architecture.
-- Established *.cavecode.txt as the preferred
-  human-facing filename convention.
-- Created the first master CaveCode project map.
+- Restored the original v1.0 five-glyph vocabulary.
+- Confirmed 🖍️ as the crayon / Human Edit Zone.
+- Removed fixed block-position semantics.
+- Added Artifact Map and Repository Master Project Map profiles.
+- Ratified CC-007 through CC-012.
+- Added artifact and project-map templates.
+- Added artifact and project-map scaffold output.
+- Rebuilt the validator around semantic roles and profiles.
+- Narrowed the fixer so it does not impose block numbers.
+- Repaired the converter and retained a compatibility launcher
+  for its historical misspelled filename.
+- Updated official examples and public documentation.
+- Added eight automated protocol tests.
+- Passed all eight tests, Python compilation, and direct
+  validation of this Master Project Map.
 
 
 NEXT ACTION:
 
-Review the existing v1.0 specification, block specification,
-glyph specification, and governance against the settled
-decisions recorded in this map.
+Field-test the same-commit Master Project Map workflow on an
+active repository such as Broken Frontier or RangeWater.
 
-Identify each relevant statement as:
-
-KEEP
-CLARIFY
-CHANGE
-REMOVE
-UNRESOLVED
-
-Do not modify tooling until the written protocol contract
-is internally coherent.
+Record any friction as evidence before proposing another
+protocol version.
 
 
 DO NOT YET:
 
-- redesign the validator
-- redesign the compiler
-- redesign the fixer
 - invent additional standard glyphs
-- declare a new CaveCode version
-- resume Broken Frontier CaveCode mapping
+- declare v1.1 current
+- normalize historical raw engine artifacts in place
+- claim a formal v1.0.1 release before field review
 
 
 ============================================================
@@ -547,45 +580,57 @@ This project map must not silently override the protocol.
 
 DATE:
 
-2026-08-14
+2026-09-26
 
 
 WHAT CHANGED?
 
-The CaveCode Protocol stabilization effort now has a master
-project map and a defined layered memory structure.
+The repository was repaired around the original v1.0 semantic
+glyph vocabulary and the Broken Frontier-style repository
+Master Project Map was formalized as a protocol profile.
 
 
 WHAT WAS DECIDED?
 
-CC-001 through CC-006 are settled and recorded in Block 7.
+CC-001 through CC-012 are settled and recorded in Block 7.
+
+The crayon is 🖍️.
+
+Glyphs express roles rather than fixed block positions.
+
+Meaningful project-state commits update the repository map in
+the same commit.
 
 
 WHY?
 
-The repository must preserve enough present-state context,
-local subsystem detail, and historical reasoning that a
-human or AI can stop and restart work without losing the
-project's meaning.
+The original protocol was coherent, while the unratified v1.1
+materials created competing glyph and block systems.
+
+Project truth must remain available inside the repository after
+the chat or AI session is gone.
 
 
 WHAT CURRENTLY WORKS?
 
-The original five semantic glyph meanings remain usable
-and understandable.
+The specification, README, teaching packs, public page,
+templates, scaffold, validator, fixer, converter, and maintained
+examples now express one v1.0 contract.
 
-The v1.0 specification provides a stable starting point.
+Eight automated tests pass.
 
-The Builder's Log preserves important historical context.
+Python compilation passes.
+
+This repository Master Project Map passes the project-profile
+validator with 13 canonical blocks.
 
 
 WHAT IS CURRENTLY BROKEN?
 
-The repository contains conflicting v1.1-era conventions.
+No known failure remains in the maintained stabilization set.
 
-The top-level README and several v1.1 tools/materials do not
-currently align with one another or cleanly preserve the
-original glyph semantics.
+Historical artifacts retain old drift by design and have not
+been reclassified as compliant.
 
 
 WHAT REMAINS UNCERTAIN?
@@ -595,21 +640,19 @@ See BLOCK 9 — OPEN QUESTIONS.
 
 WHAT SHOULD HAPPEN NEXT?
 
-Audit the four written protocol authority files before
-changing validators, compilers, fixers, templates, or examples.
+Field-test the same-commit Master Project Map workflow on a
+live project and record any friction before changing the spec.
 
 
 WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
 
-Do not confuse the five glyphs with five mandatory blocks.
+The Repository Master Project Map is not an optional diary when
+a project claims CaveCode Project-Managed compliance.
 
-There may be any number of blocks.
+It is the current-state control file and changes atomically with
+meaningful implementation work.
 
-The same glyph may be reused as often as its semantic role
-is needed.
-
-Do not treat this master map as a replacement for the
-ratified specification.
+Historical material remains evidence, not present authority.
 
 
 ============================================================

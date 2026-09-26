@@ -1,0 +1,59 @@
+============================================================
+ARTIFACT-NAME.cavecode.txt
+Artifact Name — CaveCode Artifact Map
+============================================================
+
+STATUS:
+DRAFT
+
+============================================================
+🪨 BLOCK 1 — IDENTITY
+============================================================
+
+NAME:
+Artifact Name
+
+PURPOSE:
+Describe what this artifact does.
+
+PROTECTED CONTRACT:
+Record identity, invariants, or rules that should not be casually changed.
+
+============================================================
+🖍️ BLOCK 2 — CRAYON / HUMAN EDIT ZONE
+============================================================
+
+# Safe values or notes for a human to edit.
+EXAMPLE_SETTING: 10
+EXAMPLE_LABEL: "Change me"
+
+============================================================
+🎮 BLOCK 3 — BEHAVIOR
+============================================================
+
+1. Describe what happens on start.
+2. Describe inputs and processing.
+3. Describe outputs and failure behavior.
+
+============================================================
+🌐 BLOCK 4 — PUBLIC-SAFE MATERIAL
+============================================================
+
+PUBLIC_DESCRIPTION:
+Plain-language description approved for public use.
+
+============================================================
+🔧 BLOCK 5 — OPEN WORK
+============================================================
+
+- Record extensions, experiments, and unresolved work here.
+
+============================================================
+🖍️ BLOCK 6 — HUMAN NOTES
+============================================================
+
+- Preserve context the next human or AI will need.
+
+============================================================
+END
+============================================================
