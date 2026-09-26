@@ -47,18 +47,20 @@ def read_file(path: Path) -> str:
 
 def extract_knobs(text: str) -> Dict[str, str]:
     """
-    Very simple parser: within the 🖍️ BLOCK 3 — TUNING KNOBS section,
+    Very simple parser: within a 🖍️ block containing TUNING or SETTINGS,
     look for lines like KEY: value and capture them.
     """
     knobs: Dict[str, str] = {}
     inside_knobs = False
     for line in text.splitlines():
         stripped = line.strip()
-        if stripped.startswith("🖍️ BLOCK 3") or "TUNING KNOBS" in stripped:
+        if inside_knobs and " BLOCK " in stripped:
+            inside_knobs = False
+        if stripped.startswith("🖍️ BLOCK") and (
+            "TUNING" in stripped.upper() or "SETTING" in stripped.upper()
+        ):
             inside_knobs = True
             continue
-        if stripped.startswith("🌐 BLOCK 4") or stripped.startswith("📝 BLOCK 5"):
-            inside_knobs = False
         if not inside_knobs:
             continue
         if not stripped or stripped.startswith("#"):

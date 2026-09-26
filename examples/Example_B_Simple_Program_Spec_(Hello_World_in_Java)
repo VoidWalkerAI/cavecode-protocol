@@ -1,5 +1,5 @@
 ========================================
-🧱 BLOCK 1 — SHELL
+🪨 BLOCK 1 — SHELL
 ========================================
 Title: Hello World (Java Edition)
 Short Description:
@@ -34,7 +34,7 @@ CLASS_NAME:             HelloWorld          # Should match filename
 CONSOLE_OUTPUT:         "Hello, World!"
 
 ========================================
-📝 BLOCK 5 — HUMAN NOTES
+🖍️ BLOCK 5 — HUMAN NOTES
 ========================================
 - Implementation notes:
     - Filename should be HelloWorld.java (matches class name).

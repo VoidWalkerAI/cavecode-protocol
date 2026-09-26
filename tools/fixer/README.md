@@ -1,13 +1,14 @@
-# CaveCode Fixer / Normalizer v1.0
+# CaveCode v1.0 Fixer
 
-This tool cleans up CaveCode headers so they match the official glyph
-and naming standard.
+The fixer performs narrow legacy-glyph repairs on block headers:
 
-- Fixes bad or missing glyphs
-- Normalizes block titles
-- Leaves inner content unchanged
-
-Usage:
+- 🧱 shell/identity → 🪨
+- 🎚️, ✏️, or 📝 → 🖍️
+- legacy 🔧 behavior/flow/logic headers → 🎮
 
 ```bash
-python cavecode-protocol/tools/fixer/cavecode_fix_v1.py input.cavecode > output.cavecode
+python tools/fixer/cavecode_fix_v1.py old.cavecode > repaired.cavecode.txt
+```
+
+It does not renumber blocks, force a five-block layout, rewrite titles, or
+claim that the repaired document is semantically correct. Review the result.

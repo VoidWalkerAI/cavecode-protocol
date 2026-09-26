@@ -92,6 +92,13 @@ or classrooms.
 
 ---
 
+## Semantic roles, not positions
+
+Glyphs may appear on any block number and may be reused. A block number is an
+address; it does not assign meaning. The crayon is always 🖍️. Symbols such as
+🎚️, ✏️, 📝, and 🧱 may appear in ordinary prose, but they are not canonical
+CaveCode v1.0 block-role glyphs.
+
 ## 🎨 Color Concept (Metaphor Only)
 
 Although CaveCode is plain text, the mental color model is:

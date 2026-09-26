@@ -1,85 +1,143 @@
 #!/usr/bin/env python3
-"""
-CaveCode Minimal Validator v1.0
-Checks for:
-- Required block headers
-- Empty blocks
-- Basic structure issues
+"""Reference validator for the stabilized CaveCode v1.0 contract."""
 
-For strict validation, use validate_cavecode_v1_1.py
-"""
-
-import sys
+import argparse
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Iterable
 
-REQUIRED_BLOCKS = [
-    "BLOCK 1 — IDENTITY",
-    "BLOCK 2 — TUNING KNOBS",
-    "BLOCK 3 — PUBLIC TEXT",
-    "BLOCK 4 — LOCKED LOGIC",
-]
 
-BLOCK_PATTERN = re.compile(r"^=+ +BLOCK +(\d+) +(—|-) +(.*)$")
+CANONICAL_GLYPHS = ("🪨", "🖍️", "🔧", "🎮", "🌐")
+HEADER_RE = re.compile(
+    r"^(?P<glyph>🪨|🖍️|🔧|🎮|🌐)\s+BLOCK\s+"
+    r"(?P<address>[0-9]+[A-Za-z]?)\s+(?:—|-)\s+(?P<title>\S.*)$"
+)
+HEADER_CANDIDATE_RE = re.compile(
+    r"^(?:🪨|🖍️|🔧|🎮|🌐|🎚️|✏️|📝|🧱)\s+BLOCK\s+\S+"
+)
 
-def load_file(path):
-    try:
-        return Path(path).read_text(encoding="utf-8").splitlines()
-    except Exception as e:
-        print(f"ERROR: Cannot read file: {e}")
-        sys.exit(1)
 
-def find_blocks(lines):
-    blocks = []
-    for i, line in enumerate(lines):
-        match = BLOCK_PATTERN.match(line.strip())
+@dataclass
+class ValidationResult:
+    profile: str
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    block_count: int = 0
+
+    @property
+    def ok(self) -> bool:
+        return not self.errors
+
+
+def detect_profile(text: str) -> str:
+    upper = text.upper()
+    if "MASTER PROJECT MAP" in upper or "CAVECODE READ-FIRST PROJECT FILE" in upper:
+        return "project"
+    return "artifact"
+
+
+def validate_text(text: str, profile: str = "auto") -> ValidationResult:
+    active_profile = detect_profile(text) if profile == "auto" else profile
+    result = ValidationResult(profile=active_profile)
+    headers: list[tuple[int, str, str, str]] = []
+
+    in_fence = False
+    for line_number, raw_line in enumerate(text.splitlines(), start=1):
+        line = raw_line.rstrip()
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        match = HEADER_RE.match(line)
         if match:
-            number = match.group(1)
-            title = match.group(3).strip()
-            blocks.append((int(number), title, i))
-    return blocks
+            headers.append(
+                (
+                    line_number,
+                    match.group("glyph"),
+                    match.group("address").upper(),
+                    match.group("title"),
+                )
+            )
+        elif HEADER_CANDIDATE_RE.match(line):
+            result.errors.append(
+                f"Line {line_number}: noncanonical or malformed block header: {line}"
+            )
 
-def validate(path):
-    lines = load_file(path)
-    blocks = find_blocks(lines)
+    result.block_count = len(headers)
+    if not headers:
+        result.errors.append("No canonical CaveCode block headers found.")
+        return result
 
-    if not blocks:
-        print("❌ No CaveCode blocks found.")
-        return False
+    seen: dict[str, int] = {}
+    for line_number, _glyph, address, _title in headers:
+        if address in seen:
+            result.errors.append(
+                f"Line {line_number}: duplicate block address {address} "
+                f"(first used on line {seen[address]})."
+            )
+        else:
+            seen[address] = line_number
 
-    # Check required block titles exist
-    found_titles = [b[1] for b in blocks]
-    missing = [req for req in REQUIRED_BLOCKS if req.split(" — ")[1] not in found_titles]
-    if missing:
-        print("❌ Missing required blocks:")
-        for m in missing:
-            print("   -", m)
-        return False
+    if active_profile == "project":
+        required_concepts: dict[str, Iterable[str]] = {
+            "status": ("STATUS:",),
+            "purpose of this file": ("PURPOSE OF THIS FILE:",),
+            "authority": ("AUTHORITY",),
+            "current state": ("PROJECT STATE:", "CURRENT STATE", "CURRENT PROJECT"),
+            "next action": ("NEXT ACTION:",),
+            "resume/handoff": ("RESUME HERE", "HANDOFF"),
+        }
+        upper = text.upper()
+        for label, alternatives in required_concepts.items():
+            if not any(token in upper for token in alternatives):
+                result.errors.append(
+                    f"Project Map is missing required concept: {label}."
+                )
 
-    # Check block order
-    numbers = [b[0] for b in blocks]
-    if numbers != sorted(numbers):
-        print("❌ Blocks out of order (must be 1, 2, 3, 4 in sequence).")
-        return False
+    if "🎚️" in text or "✏️ BLOCK" in text or "📝 BLOCK" in text or "🧱 BLOCK" in text:
+        result.warnings.append(
+            "Legacy v1.1-era block glyph detected; use canonical v1.0 roles."
+        )
 
-    # Check empty blocks
-    for idx, (num, title, start_line) in enumerate(blocks):
-        end_line = blocks[idx + 1][2] if idx + 1 < len(blocks) else len(lines)
-        contents = lines[start_line + 1:end_line]
+    return result
 
-        if all(len(line.strip()) == 0 for line in contents):
-            print(f"⚠️ Warning: Block {num} (‘{title}’) is empty.")
 
-    print("✅ CaveCode file passes minimal validation.")
-    return True
+def validate_file(path: Path, profile: str = "auto") -> ValidationResult:
+    return validate_text(path.read_text(encoding="utf-8"), profile=profile)
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python validate_cavecode.py path/to/file.cavecode")
-        sys.exit(1)
 
-    path = sys.argv[1]
-    validate(path)
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("path", type=Path)
+    parser.add_argument(
+        "--profile", choices=("auto", "artifact", "project"), default="auto"
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    try:
+        result = validate_file(args.path, profile=args.profile)
+    except (OSError, UnicodeError) as exc:
+        print(f"FAIL: cannot read {args.path}: {exc}")
+        return 1
+
+    status = "PASS" if result.ok else "FAIL"
+    if result.ok and result.warnings:
+        status = "PASS WITH WARNINGS"
+    print(
+        f"{status}: {args.path} "
+        f"({result.profile} profile, {result.block_count} blocks)"
+    )
+    for message in result.errors:
+        print(f"ERROR: {message}")
+    for message in result.warnings:
+        print(f"WARN: {message}")
+    return 0 if result.ok else 1
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

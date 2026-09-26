@@ -1,68 +1,182 @@
 #!/usr/bin/env python3
-import sys
-from datetime import datetime
+"""Print a CaveCode v1.0 Artifact Map or Repository Master Project Map."""
 
-def main():
-    title = "New CaveCode Card"
-    if len(sys.argv) > 1:
-        title = sys.argv[1]
+import argparse
+from datetime import datetime, timezone
 
-    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%SZ")
 
-    template = f"""\
-========================================
-🪨 CAVECODE CARD — BLANK SCAFFOLD (v1.0)
-========================================
+def artifact_map(title: str, created: str) -> str:
+    return f"""============================================================
+{title.upper().replace(' ', '-')}.cavecode.txt
+{title} — CaveCode Artifact Map
+============================================================
 
-Title: {title}
-Created: {now}
-Source: scaffolded by CaveCode tools.
+STATUS:
+DRAFT
 
-========================================
-🧱 BLOCK 1 — SHELL
-========================================
-Short Description:
-    (What is this thing?)
+CREATED:
+{created}
 
-Goal:
-    🌐 (What should the player or user accomplish?)
+============================================================
+🪨 BLOCK 1 — IDENTITY
+============================================================
 
-========================================
-🎮 BLOCK 2 — BEHAVIOR SUMMARY
-========================================
-On Start:
-    - (What happens when this begins?)
+NAME:
+{title}
 
-On Input:
-    - (What happens when the user presses / taps / clicks?)
+PURPOSE:
+Describe what this artifact does.
 
-On Update:
-    - (What changes over time?)
+PROTECTED CONTRACT:
+Record identity, invariants, or rules that should not be casually changed.
 
-========================================
-🖍️ BLOCK 3 — TUNING KNOBS
-========================================
-# Safe values for humans to tweak:
+============================================================
+🖍️ BLOCK 2 — CRAYON / HUMAN EDIT ZONE
+============================================================
 
-SPEED_BASE:       6.0
-SPEED_INCREMENT:  0.4
-MAX_LIVES:        3
+EXAMPLE_SETTING: 10
+EXAMPLE_LABEL: "Change me"
 
-========================================
-🌐 BLOCK 4 — PUBLIC TEXT
-========================================
-TITLE_TEXT:       "{title}"
-START_MESSAGE:    "Tap to begin."
-GAME_OVER_TEXT:   "Game over. Try again."
+============================================================
+🎮 BLOCK 3 — BEHAVIOR
+============================================================
 
-========================================
-📝 BLOCK 5 — HUMAN NOTES
-========================================
-# Use this space to keep notes, ideas, and plans.
-# This file is for humans first, machines second.
+1. Describe what happens on start.
+2. Describe inputs and processing.
+3. Describe outputs and failure behavior.
+
+============================================================
+🌐 BLOCK 4 — PUBLIC-SAFE MATERIAL
+============================================================
+
+PUBLIC_DESCRIPTION:
+Plain-language description approved for public use.
+
+============================================================
+🔧 BLOCK 5 — OPEN WORK
+============================================================
+
+- Record extensions, experiments, and unresolved work here.
+
+============================================================
+🖍️ BLOCK 6 — HUMAN NOTES
+============================================================
+
+- Preserve context the next human or AI will need.
 """
 
-    sys.stdout.write(template)
+
+def project_map(title: str, created: str) -> str:
+    return f"""============================================================
+{title.upper().replace(' ', '-')}.cavecode.txt
+{title} — Master Project Map
+CaveCode Read-First Project File
+============================================================
+
+STATUS:
+ACTIVE
+
+PROJECT STATE:
+Describe the current implemented, tested, committed, and deployed state.
+
+CREATED:
+{created}
+
+PURPOSE OF THIS FILE:
+This is the repository's read-first source for current project understanding
+and current human decisions.
+
+AUTHORITY RULE:
+This map governs current understanding. Reconcile conflicts explicitly and
+update this map in the same commit as meaningful project-state changes.
+
+============================================================
+🪨 BLOCK 1 — PROJECT IDENTITY
+============================================================
+
+NAME:
+{title}
+
+PURPOSE:
+Describe the problem and intended outcome.
+
+============================================================
+🪨 BLOCK 2 — AUTHORITY / PROTECTED CONTRACTS
+============================================================
+
+- List ratified decisions, contracts, and authoritative files.
+
+============================================================
+🎮 BLOCK 3 — CURRENT SYSTEM / RUNTIME STATE
+============================================================
+
+IMPLEMENTED:
+-
+
+TESTED:
+-
+
+DEPLOYED:
+-
+
+============================================================
+🔧 BLOCK 4 — KNOWN PROBLEMS / OPEN QUESTIONS
+============================================================
+
+-
+
+============================================================
+🖍️ BLOCK 5 — CURRENT WORK / RESUME HERE
+============================================================
+
+CURRENTLY WORKING:
+-
+
+NEXT ACTION:
+-
+
+DO NOT YET:
+-
+
+============================================================
+🖍️ BLOCK 6 — HANDOFF SNAPSHOT
+============================================================
+
+DATE:
+{created[:10]}
+
+WHAT CHANGED?
+-
+
+WHAT CURRENTLY WORKS?
+-
+
+WHAT IS CURRENTLY BROKEN?
+-
+
+WHAT SHOULD HAPPEN NEXT?
+-
+"""
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("title", nargs="?", default="New CaveCode Project")
+    parser.add_argument(
+        "--profile",
+        choices=("artifact", "project"),
+        default="artifact",
+        help="artifact map (default) or repository master project map",
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    created = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    output = project_map(args.title, created) if args.profile == "project" else artifact_map(args.title, created)
+    print(output, end="")
+
 
 if __name__ == "__main__":
     main()
