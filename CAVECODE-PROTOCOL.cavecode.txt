@@ -4,7 +4,7 @@ CaveCode Protocol — Master Project Map
 ============================================================
 
 STATUS:
-STABILIZED v1.0 CONTRACT / FORGEKEEPER ENGINE CONTRACT RATIFIED / ACTIVE
+STABILIZED v1.0 CONTRACT / FORGEKEEPER REPOSITORY INITIALIZED / ACTIVE
 
 CURRENT DATE:
 2026-09-26
@@ -480,7 +480,8 @@ CaveCode itself must remain readable without special software.
 
 CURRENT PROJECT:
 
-CaveCode Forgekeeper initialization following the RangeWater pilot.
+CaveCode field adoption with Forgekeeper implementation delegated to its
+separate repository.
 
 
 CURRENT PHASE:
@@ -489,27 +490,38 @@ RangeWater pilot: FIELD ACCEPTED — CLOSED WITH RECORDED FRICTION.
 
 FK-ENG-001 Revision 1: RATIFIED by Michael on 2026-09-27.
 
-Separate Forgekeeper repository initialization: ASSIGNED.
+Separate Forgekeeper repository: CREATED AND INITIALIZED.
+
+Repository:
+voidwalker-sagewire/cavecode-forgekeeper
+
+Current Forgekeeper evidence head:
+15161354711662f30b3454fb0e3d5868a02ab6e0
 
 
 COMPLETED IN CURRENT PASS:
 
-- Inspected and closed the first live RangeWater Forgekeeper pilot.
-- Preserved the qualified CC-009 same-commit synchronization finding.
-- Drafted FK-ENG-001 Revision 1.
-- Received Michael's explicit ratification.
-- Recorded ratification under:
-  ratifications/FK-ENG-001-REV1-RATIFICATION.cavecode.txt
-- Updated this Master Project Map atomically with the ratification record.
+- Closed the RangeWater field pilot.
+- Preserved the qualified CC-009 synchronization finding.
+- Ratified FK-ENG-001 Revision 1.
+- Created the separate private Forgekeeper repository.
+- Copied the frozen contract and ratification evidence into that repository.
+- Created its Master Project Map and deterministic Python package scaffold.
+- Verified nine initial state-ladder and authority-gate tests in GitHub Actions.
+- Recorded the cross-repository initialization transition under:
+  transitions/FK-ENG-001-REPOSITORY-INITIALIZED.cavecode.txt
 
 
 NEXT ACTION:
 
-1. Integrate this branch into CaveCode main.
-2. Create a separate private repository named cavecode-forgekeeper.
-3. Initialize it from the ratified FK-ENG-001 Revision 1 contract.
-4. Preserve read-only inspection as the default operating mode.
-5. Begin implementation only within the ratified minimum boundary.
+Continue engine implementation in:
+
+voidwalker-sagewire/cavecode-forgekeeper
+
+Its next scoped task is the read-only local repository inspection core.
+
+Use this CaveCode Protocol repository for protocol governance, historical field
+evidence, and future contract changes. Do not duplicate routine engine work here.
 
 
 DO NOT:
@@ -517,7 +529,7 @@ DO NOT:
 - allow Forgekeeper to ratify its own conclusions
 - grant autonomous merge, release, deployment, or deletion authority
 - treat continuity-only authority as permission to modify application code
-- describe the RangeWater pilot as a clean CC-009 atomic-sync pass
+- describe the complete Forgekeeper engine as VERIFIED
 - silently change the universal CaveCode v1.0 specification
 - broaden implementation beyond FK-ENG-001 without a successor contract
 
@@ -587,62 +599,62 @@ DATE:
 
 WHAT CHANGED?
 
-Michael ratified FK-ENG-001 Revision 1. The ratification record and this Master
-Project Map transition were prepared in the same commit after the qualified
-RangeWater pilot closeout.
+Michael ratified FK-ENG-001 Revision 1. The separate private Forgekeeper
+repository was created and initialized under voidwalker-sagewire. Its ratified
+contract, project map, deterministic state model, tests, and CI workflow now
+exist.
 
 
 WHAT WAS DECIDED?
 
-- FK-ENG-001 Revision 1 is RATIFIED.
-- Forgekeeper will be implemented in a separate repository.
-- GitHub is the first repository adapter.
-- Read-only inspection is the default.
-- Dry-run reconciliation precedes assigned writes.
-- Deterministic code controls parsing, validation, state comparison, authority
-  gates, and write scope.
+- CaveCode protocol governance remains in this repository.
+- Forgekeeper engine implementation lives in its separate repository.
+- Read-only inspection remains the default.
 - Michael remains final authority over project truth.
-- The fourteen minimum acceptance tests govern initial verification.
+- The complete engine is not VERIFIED merely because the repository scaffold
+  and nine state-gate tests passed.
 
 
 WHY?
 
-RangeWater proved the continuity model under real release pressure and exposed
-the synchronization, authority, and safety requirements the engine must enforce.
+Separating protocol governance from engine implementation prevents the
+Forgekeeper runtime from quietly becoming the authority over CaveCode itself.
 
 
 WHAT CURRENTLY WORKS?
 
 - CaveCode v1.0 maintained tooling and tests remain verified.
 - The RangeWater pilot is closed with its friction preserved.
-- The minimum Forgekeeper engine contract is ratified.
-- The next repository boundary and initial implementation scope are defined.
+- FK-ENG-001 Revision 1 is ratified.
+- The Forgekeeper repository is private, governed, and initialized.
+- Its nine initial state and authority-gate tests passed in GitHub Actions run
+  36330600146.
 
 
 WHAT IS CURRENTLY BROKEN?
 
-The separate Forgekeeper engine does not yet exist at the moment of this
-ratification record.
+No maintained CaveCode v1.0 tooling failure is known.
+
+The full Forgekeeper engine is not yet implemented or verified.
 
 
 WHAT REMAINS UNCERTAIN?
 
-- Later deployment surface beyond the initial repository and command-line core.
+- Later deployment surface beyond the command-line core.
 - Whether field evidence will support a future CaveCode patch release.
 - Any capability beyond the ratified minimum engine boundary.
 
 
 WHAT SHOULD HAPPEN NEXT?
 
-Create and initialize the separate cavecode-forgekeeper repository, then begin
-the ratified read-first minimum implementation.
+Implement the read-only local repository inspection core in
+voidwalker-sagewire/cavecode-forgekeeper.
 
 
 WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
 
-Ratification authorizes the minimum engine contract and separate repository. It
-does not grant Forgekeeper independent truth authority or broad permission to
-modify inspected projects.
+The repository and state-gate scaffold are real and verified at their limited
+scope. The full engine and its fourteen acceptance tests are not yet complete.
 
 
 ============================================================

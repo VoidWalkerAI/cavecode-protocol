@@ -1,0 +1,98 @@
+============================================================
+FK-ENG-001-REPOSITORY-INITIALIZED.cavecode.txt
+Forgekeeper Separate Repository Initialization Record
+============================================================
+
+RECORD ID:
+CC-FK-TR-001
+
+STATE:
+IMPLEMENTED — SEPARATE REPOSITORY INITIALIZED
+
+AUTHORITY:
+FK-ENG-001 Revision 1, ratified by Michael on 2026-09-27
+
+RECORDED DATE:
+2026-09-27
+
+
+============================================================
+🪨 BLOCK 1 — REPOSITORY IDENTITY
+============================================================
+
+Repository:
+voidwalker-sagewire/cavecode-forgekeeper
+
+Visibility:
+PRIVATE
+
+Initialization commit:
+13ab11b7d3ef3a82cd25b388d57bb3b043afb6f1
+
+Verified initialization record head:
+15161354711662f30b3454fb0e3d5868a02ab6e0
+
+
+============================================================
+🎮 BLOCK 2 — INITIALIZED SCOPE
+============================================================
+
+The separate repository contains:
+
+- its own CaveCode Master Project Map;
+- the frozen FK-ENG-001 Revision 1 contract;
+- the ratification record;
+- a read-first README;
+- a minimal Python package scaffold;
+- deterministic state-ladder and authority-gate functions;
+- nine initial unit tests;
+- a GitHub Actions workflow;
+- a verified repository-initialization transition record.
+
+
+============================================================
+🎮 BLOCK 3 — VERIFICATION
+============================================================
+
+GitHub Actions run 36330600146 completed successfully against initialization
+commit 13ab11b7d3ef3a82cd25b388d57bb3b043afb6f1.
+
+The result verifies the repository scaffold and initial state gates only.
+
+It does not verify the complete fourteen-test FK-ENG-001 acceptance suite.
+
+
+============================================================
+🪨 BLOCK 4 — REPOSITORY BOUNDARY
+============================================================
+
+This CaveCode Protocol repository remains authoritative for:
+
+- CaveCode v1.0;
+- protocol governance;
+- the RangeWater pilot closeout;
+- FK-ENG-001 ratification;
+- future contract changes.
+
+The Forgekeeper repository is authoritative for:
+
+- engine implementation state;
+- engine tests and CI;
+- engine-specific transitions;
+- the implementation resume point.
+
+Neither repository silently overrides the other's declared scope.
+
+
+============================================================
+🖍️ BLOCK 5 — NEXT ACTION
+============================================================
+
+Continue implementation in voidwalker-sagewire/cavecode-forgekeeper.
+
+Begin with the read-only local repository inspection core.
+
+
+============================================================
+END — CC-FK-TR-001 — IMPLEMENTED
+============================================================
