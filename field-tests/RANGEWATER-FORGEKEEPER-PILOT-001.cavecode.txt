@@ -1,0 +1,204 @@
+============================================================
+RANGEWATER-FORGEKEEPER-PILOT-001.cavecode.txt
+RangeWater Forgekeeper Pilot — Field Closeout
+============================================================
+
+RECORD ID:
+RW-FK-PILOT-001
+
+REVISION:
+1
+
+STATUS:
+FIELD ACCEPTED — CLOSED WITH RECORDED FRICTION
+
+AUTHORITY:
+Michael — Project Owner, Lead Architect, Final Decision Authority
+
+RECORDED DATE:
+2026-09-27
+
+SOURCE REPOSITORIES:
+- CaveCode: VoidWalkerAI/cavecode-protocol
+- RangeWater: voidwalker-sagewire/rangewater-android
+
+EVIDENCE HEADS:
+- CaveCode baseline: 04e0044e7fac34ebb5477dfb0662a36158fe5fd1
+- RangeWater closeout: 1ead13b9cee8be966696b071d6da6510103e3c3a
+
+
+============================================================
+🪨 BLOCK 1 — PILOT IDENTITY AND PURPOSE
+============================================================
+
+RangeWater is the first live CaveCode Forgekeeper pilot.
+
+The pilot tested whether repository-side CaveCode continuity could preserve
+current project truth, authority, evidence lineage, handoff state, and history
+through a real Android release and Google Play production publication.
+
+This record closes the pilot. It does not claim that a separate Forgekeeper
+engine exists.
+
+
+============================================================
+🪨 BLOCK 2 — GOVERNING AUTHORITY
+============================================================
+
+RangeWater governance was controlled by the ratified RangeWater Continuity
+Contract RW-CC-001 Revision 1 and the ratified current-state and branch-sync
+contract RW-FK-002 Revision 1.
+
+Ratified RangeWater state ladder:
+
+Captured → Proposed → Ratified → Assigned → Implemented → Verified →
+Field Accepted → Superseded
+
+Automatic systems may capture candidate memories.
+
+Michael retains final authority over RangeWater project truth.
+
+The RangeWater ladder is project-specific governance layered over CaveCode.
+This pilot does not, by itself, amend the universal CaveCode v1.0 specification.
+
+
+============================================================
+🎮 BLOCK 3 — LIVE TEST SEQUENCE
+============================================================
+
+1. CaveCode v1.0 designated RangeWater as a candidate live field test.
+2. RangeWater adopted a ratified continuity contract and current-state index.
+3. The pilot encountered branch drift and reconciled the authoritative branch.
+4. RangeWater 1.1.0 versionCode 19 passed automated and physical acceptance.
+5. Google Play delivered an in-place 1.0.1-to-1.1.0 migration.
+6. Existing ranch records survived the migration.
+7. Michael authorized production promotion of the exact tested bundle.
+8. Google approved the release and Michael published it to Production.
+9. Later repository inspection found stale entry-point and capture language.
+10. Continuity records explicitly superseded the stale current-state statements
+    without erasing historical evidence.
+11. Michael authorized closure of the RangeWater pilot inside CaveCode.
+
+
+============================================================
+🎮 BLOCK 4 — RESULTS
+============================================================
+
+PASS — AUTHORITY PRESERVATION
+
+The automation did not ratify project truth. Michael remained final authority.
+
+PASS — EVIDENCE LINEAGE
+
+The repository records connect source, tests, physical acceptance, Play
+migration, production authority, publication, and later supersession.
+
+PASS — HISTORY PRESERVATION
+
+Historical captures and the legacy master ledger were preserved rather than
+silently rewritten or deleted.
+
+PASS — COLD-START RECOVERY
+
+A new human or AI can begin with the RangeWater continuity contract and active
+current-state index and recover the current release state.
+
+PASS — CONFLICT AND DRIFT RECOVERY
+
+The pilot detected branch drift and stale current-state language and recorded
+explicit resolutions.
+
+QUALIFIED FAIL — CC-009 SAME-COMMIT SYNCHRONIZATION
+
+Meaningful product-state changes and the master-map repair did not remain atomic
+throughout the release sequence. The final repository state is explicit and
+auditable, but later continuity commits repaired earlier drift.
+
+NOT TESTED — AUTOMATED FORGEKEEPER ENGINE
+
+The pilot workflow was performed through human direction and AI-assisted
+repository operations. No standalone Forgekeeper engine ran this pilot.
+
+
+============================================================
+🔧 BLOCK 5 — FRICTION DISCOVERED
+============================================================
+
+FRICTION 1 — LARGE LEGACY MASTER MAP
+
+The RangeWater root master ledger contained broad historical and sensitive
+operational material. The active connector would not safely republish the whole
+file merely to replace stale current-state lines.
+
+FRICTION 2 — DISTRIBUTED CURRENT TRUTH
+
+Current truth was spread across the root master ledger, a short current-state
+index, workorders, captures, transition records, and Git history.
+
+FRICTION 3 — POST-EVENT RECONCILIATION
+
+Fast external events such as Google Play approval and publication were recorded
+after they occurred. This created a period in which repository entry points did
+not agree.
+
+FRICTION 4 — GOVERNANCE OVERLAY
+
+RangeWater's continuity ladder is more detailed than core CaveCode v1.0.
+An engine must load project-specific governance without treating it as a silent
+change to the universal protocol.
+
+
+============================================================
+🪨 BLOCK 6 — REQUIRED ENGINE LESSONS
+============================================================
+
+A Forgekeeper engine must:
+
+- inspect before proposing changes;
+- identify the authoritative repository and exact ref;
+- distinguish the universal CaveCode contract from project-specific governance;
+- default to read-only operation;
+- detect competing current-state claims;
+- refuse to infer human ratification;
+- produce CAPTURED evidence and PROPOSED repairs with exact source pointers;
+- prefer atomic state-map updates with meaningful implementation changes;
+- mark continuity incomplete when atomic synchronization cannot occur;
+- support explicit append-only supersession when safe direct repair is blocked;
+- avoid exposing secrets or republishing sensitive operational material;
+- preserve raw evidence separately from normalized interpretations;
+- leave an auditable cold-start resume point.
+
+
+============================================================
+🌐 BLOCK 7 — PUBLIC-SAFE FINDING
+============================================================
+
+RangeWater completed the first live CaveCode Forgekeeper pilot during a real
+Google Play production release. The pilot validated repository-side continuity,
+authority preservation, evidence lineage, recovery, and supersession, while
+exposing a same-commit synchronization problem for the future engine to solve.
+
+
+============================================================
+🖍️ BLOCK 8 — CLOSEOUT AND NEXT ACTION
+============================================================
+
+CLOSEOUT:
+
+Michael accepted closure of the RangeWater pilot on 2026-09-27.
+
+FINAL PILOT JUDGMENT:
+
+FIELD ACCEPTED — CLOSED WITH RECORDED FRICTION.
+
+NEXT ACTION:
+
+Review proposals/FK-ENG-001-REV1.cavecode.txt.
+
+No separate Forgekeeper engine repository should be created until Michael
+ratifies an engine contract.
+
+
+============================================================
+END — RW-FK-PILOT-001
+============================================================

@@ -1,0 +1,338 @@
+============================================================
+FK-ENG-001-REV1.cavecode.txt
+Forgekeeper Minimum Engine Contract — Revision 1
+============================================================
+
+CONTRACT ID:
+FK-ENG-001
+
+REVISION:
+1
+
+STATUS:
+PROPOSED — AWAITING MICHAEL RATIFICATION
+
+PROJECT:
+CaveCode Forgekeeper
+
+FINAL AUTHORITY:
+Michael
+
+PROPOSED DATE:
+2026-09-27
+
+PILOT BASIS:
+field-tests/RANGEWATER-FORGEKEEPER-PILOT-001.cavecode.txt
+
+
+============================================================
+🪨 BLOCK 1 — PURPOSE
+============================================================
+
+Forgekeeper is a continuity engine for CaveCode-managed repositories.
+
+Its first duty is not to write product code. Its first duty is to determine
+what the repository says is true, identify where that truth conflicts with
+evidence, and prepare an auditable path back to coherence.
+
+Forgekeeper supports humans and AI working across interrupted sessions,
+different devices, different models, and multiple repositories.
+
+Forgekeeper does not replace Git, CaveCode, human judgment, or project-specific
+governance.
+
+
+============================================================
+🪨 BLOCK 2 — AUTHORITY BOUNDARY
+============================================================
+
+Michael retains final authority over project truth.
+
+The engine may automatically:
+
+- inspect authorized repositories and refs;
+- validate CaveCode structure;
+- capture candidate memories and evidence;
+- identify conflicts, missing records, and stale current-state claims;
+- calculate deterministic comparisons;
+- draft proposals and patches;
+- report what it cannot prove.
+
+The engine may not automatically:
+
+- ratify a proposal;
+- claim field acceptance;
+- supersede accepted truth without an authorized successor record;
+- invent authority;
+- change application code under a continuity-only assignment;
+- publish, deploy, merge, release, or delete;
+- treat AI memory or chat history as more authoritative than repository evidence.
+
+An engine-produced proposal becomes project truth only through the governing
+project's required human authority process.
+
+
+============================================================
+🪨 BLOCK 3 — STATE MODEL
+============================================================
+
+The initial engine must understand this ratified Forgekeeper ladder:
+
+Captured → Proposed → Ratified → Assigned → Implemented → Verified →
+Field Accepted → Superseded
+
+State meanings:
+
+CAPTURED
+- A candidate observation, report, memory, or detected fact.
+- May be created automatically.
+- Carries no authority to modify accepted project truth.
+
+PROPOSED
+- A structured candidate decision, contract, repair, or work scope.
+- May be drafted automatically or by a human.
+- Must be visibly marked as unratified.
+
+RATIFIED
+- Approved as project truth by the project's named final authority.
+- Forgekeeper cannot grant this state to itself.
+
+ASSIGNED
+- Ratified work explicitly assigned to an actor or engine.
+
+IMPLEMENTED
+- The assigned repository change exists at an exact commit or artifact.
+
+VERIFIED
+- Defined checks passed against exact evidence.
+- Verification does not equal field acceptance.
+
+FIELD ACCEPTED
+- The authorized human accepts real-world behavior or operational result.
+
+SUPERSEDED
+- A later authorized record replaces an earlier record for current-state use.
+- The earlier record remains preserved as history.
+
+
+============================================================
+🪨 BLOCK 4 — AUTHORITY AND SOURCE PRECEDENCE
+============================================================
+
+Forgekeeper must load authority from the inspected project's repository.
+
+Default precedence, unless a ratified project contract says otherwise:
+
+1. named final human authority;
+2. ratified project governance and contracts;
+3. active current-state or Master Project Map;
+4. accepted workorders and transition records;
+5. exact Git commits, tests, deployments, and field evidence;
+6. captured reports and unratified proposals;
+7. chat memory or model recollection.
+
+A lower source cannot silently override a higher source.
+
+When two high-authority sources conflict, Forgekeeper must open a conflict
+record and stop short of choosing project truth.
+
+
+============================================================
+🎮 BLOCK 5 — MINIMUM ENGINE WORKFLOW
+============================================================
+
+INPUT:
+
+- repository identity;
+- exact branch, tag, or commit ref;
+- authorized connection;
+- operation mode;
+- optional project-specific governance path.
+
+FLOW:
+
+1. Resolve the exact repository and ref.
+2. Record the evidence head before analysis.
+3. Inventory repository files without modification.
+4. Locate CaveCode Master Project Maps, contracts, current-state indexes,
+   workorders, captures, transitions, supersessions, and local subsystem maps.
+5. Validate maintained CaveCode files against the applicable protocol version.
+6. Load project-specific governance separately from the core protocol.
+7. Extract status, authority, current work, next action, and resume point.
+8. Compare current-state claims with referenced repository evidence.
+9. Detect contradictions, stale pointers, missing evidence, and unsafe scope.
+10. Emit a deterministic inspection report.
+11. Create CAPTURED candidates or PROPOSED repairs as appropriate.
+12. Stop at the authority gate.
+13. After explicit assignment, prepare the smallest authorized repository patch.
+14. Verify the resulting commit and changed-file scope.
+15. Record the new evidence head and leave a cold-start resume point.
+
+OUTPUT:
+
+- machine-readable inspection result;
+- mobile-readable human report;
+- exact evidence pointers;
+- conflict list;
+- candidate transition records;
+- proposed patch plan;
+- verification result.
+
+
+============================================================
+🎮 BLOCK 6 — OPERATING MODES
+============================================================
+
+READ-ONLY INSPECTION
+
+- Default mode.
+- No repository writes.
+- Produces findings and candidate records only.
+
+DRY-RUN RECONCILIATION
+
+- Produces the exact proposed file operations and state transitions.
+- Does not write them.
+
+ASSIGNED WRITE
+
+- Requires an already ratified scope and explicit assignment.
+- Writes only to the authorized repository, branch, and paths.
+- Must verify changed-file scope after writing.
+- Must stop if evidence head or authority changed unexpectedly.
+
+No mode may silently broaden its own scope.
+
+
+============================================================
+🪨 BLOCK 7 — ATOMICITY AND DRIFT RULES
+============================================================
+
+For a meaningful project-state change, Forgekeeper must prefer one atomic commit
+containing both the implementation evidence and the current-state map update.
+
+Before an assigned write, Forgekeeper must check:
+
+- expected branch head;
+- current Master Project Map;
+- affected workorder or contract;
+- proposed changed-file set;
+- whether the repository connection can safely update every required file.
+
+If atomic completion is impossible:
+
+1. do not describe continuity as complete;
+2. record the blocked requirement;
+3. preserve the implementation evidence;
+4. propose an explicit reconciliation or supersession record;
+5. require the governing authority for any truth-changing exception.
+
+Post-event reports, such as external store approval, may be recorded afterward,
+but the repository must clearly show the evidence time and recording time.
+
+
+============================================================
+🪨 BLOCK 8 — SAFETY AND DATA HANDLING
+============================================================
+
+Forgekeeper must:
+
+- operate on explicit repository and ref targets;
+- use least privilege;
+- default to read-only credentials where practical;
+- never print, store, or republish secrets;
+- avoid copying signing material, tokens, recovery secrets, or private contact
+  data into reports;
+- support redacted evidence pointers;
+- refuse broad destructive operations;
+- preserve unrelated user changes;
+- use append-only transitions when history must remain intact;
+- distinguish deletion from supersession;
+- log every write and its resulting commit;
+- stop when authorization or target identity is ambiguous.
+
+Forgekeeper must not use safety restrictions as permission to invent a workaround.
+A blocked write remains blocked until a safe authorized path exists.
+
+
+============================================================
+🔧 BLOCK 9 — MINIMUM IMPLEMENTATION BOUNDARY
+============================================================
+
+Revision 1 proposes:
+
+- a separate Forgekeeper repository;
+- a deterministic core independent of any single AI provider;
+- GitHub as the first repository adapter;
+- CaveCode v1.0 as the first protocol adapter;
+- project-governance overlays loaded from repository files;
+- structured JSON output plus mobile-readable plain text;
+- a command-line entry point suitable for CI and later service wrapping;
+- automated tests using fixed repository fixtures;
+- no required graphical interface for the first implementation;
+- no autonomous merge, release, deployment, or deletion capability.
+
+AI assistance may explain evidence and draft proposals. Deterministic code must
+control parsing, validation, state comparison, authority gates, and write scope.
+
+
+============================================================
+🎮 BLOCK 10 — MINIMUM ACCEPTANCE TESTS
+============================================================
+
+The first engine is not VERIFIED until it can:
+
+1. inspect a fixed CaveCode Protocol repository fixture;
+2. inspect a fixed RangeWater pilot fixture;
+3. identify the correct Master Project Map and current-state entry points;
+4. validate canonical CaveCode v1.0 glyphs and block headers;
+5. distinguish project-specific governance from the core protocol;
+6. detect a deliberately stale current-state claim;
+7. preserve raw evidence while proposing a normalized interpretation;
+8. refuse to mark its own proposal RATIFIED;
+9. refuse an unassigned repository write;
+10. detect an unexpected branch-head change before writing;
+11. produce identical structured output for identical input;
+12. prove that a continuity-only operation changed no application files;
+13. record exact before-and-after evidence heads for an assigned test write;
+14. leave a usable cold-start resume point.
+
+Field acceptance requires Michael to review the output on a real repository.
+
+
+============================================================
+🌐 BLOCK 11 — PUBLIC-SAFE DESCRIPTION
+============================================================
+
+Forgekeeper is a CaveCode-powered continuity engine that helps a human or AI
+resume repository work safely. It finds the project's current map, checks it
+against evidence, identifies drift, and prepares auditable repairs while
+preserving human authority over project truth.
+
+
+============================================================
+🖍️ BLOCK 12 — OPEN DECISIONS FOR RATIFICATION
+============================================================
+
+Revision 1 proposes, but does not yet ratify:
+
+- separate repository creation after contract ratification;
+- GitHub-first implementation;
+- command-line and CI operation before any web interface;
+- deterministic core with optional AI assistance;
+- read-only inspection as the default;
+- explicit assigned-write mode;
+- the fourteen minimum acceptance tests in Block 10.
+
+Michael may ratify this revision as written or require a successor revision.
+
+Until ratification:
+
+- this file remains PROPOSED;
+- no Forgekeeper engine repository is authorized by this contract;
+- no implementation state may be claimed.
+
+
+============================================================
+END — FK-ENG-001 REVISION 1 — PROPOSED
+============================================================

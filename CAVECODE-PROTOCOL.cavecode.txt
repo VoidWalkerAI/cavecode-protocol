@@ -4,7 +4,7 @@ CaveCode Protocol — Master Project Map
 ============================================================
 
 STATUS:
-STABILIZED v1.0 CONTRACT / VERIFIED / ACTIVE
+STABILIZED v1.0 CONTRACT / RANGEWATER PILOT FIELD ACCEPTED / ACTIVE
 
 CURRENT DATE:
 2026-09-26
@@ -435,6 +435,13 @@ REMAINING LIMITATIONS:
 - Automated validation can verify structure, not whether a
   project's status claims are truthful.
 - No formal v1.0.1 release tag has been created.
+- RangeWater showed that same-commit Master Project Map synchronization can fail
+  when a large legacy map cannot be safely rewritten through the active repository
+  connection. The recovery was explicit and auditable, but it occurred after the
+  product-state commits rather than atomically with them.
+- The ratified RangeWater continuity ladder extends beyond the core v1.0 protocol.
+  Forgekeeper must treat project-specific governance as an overlay and must not
+  silently promote it into the universal CaveCode specification.
 
 
 ============================================================
@@ -473,51 +480,60 @@ CaveCode itself must remain readable without special software.
 
 CURRENT PROJECT:
 
-CaveCode Protocol stabilization.
+CaveCode Protocol field adoption and Forgekeeper preparation.
 
 
 CURRENT PHASE:
 
-Stabilization complete and verified.
+The first live Repository Master Project Map field trial is closed.
 
-Begin field adoption of the Repository Master Project Map
-workflow in active CaveCode-managed projects.
+RangeWater served as the first CaveCode Forgekeeper pilot. The pilot is
+FIELD ACCEPTED WITH RECORDED FRICTION. It proved repository-side continuity,
+authority preservation, evidence lineage, cold-start recovery, conflict
+detection, and append-only supersession against a real Google Play release.
+
+The pilot did not cleanly satisfy CC-009 same-commit synchronization. Later
+continuity records repaired the current state after product-state commits, and
+the legacy master ledger required an explicit supersession record rather than
+a direct rewrite.
 
 
 COMPLETED IN CURRENT PASS:
 
-- Restored the original v1.0 five-glyph vocabulary.
-- Confirmed 🖍️ as the crayon / Human Edit Zone.
-- Removed fixed block-position semantics.
-- Added Artifact Map and Repository Master Project Map profiles.
-- Ratified CC-007 through CC-012.
-- Added artifact and project-map templates.
-- Added artifact and project-map scaffold output.
-- Rebuilt the validator around semantic roles and profiles.
-- Narrowed the fixer so it does not impose block numbers.
-- Repaired the converter and retained a compatibility launcher
-  for its historical misspelled filename.
-- Updated official examples and public documentation.
-- Added eight automated protocol tests.
-- Passed all eight tests, Python compilation, and direct
-  validation of this Master Project Map.
+- Inspected the authoritative RangeWater repository state.
+- Preserved the exact RangeWater pilot evidence heads.
+- Recorded the pilot result under:
+  field-tests/RANGEWATER-FORGEKEEPER-PILOT-001.cavecode.txt
+- Drafted the first minimum Forgekeeper engine contract under:
+  proposals/FK-ENG-001-REV1.cavecode.txt
+- Kept the engine contract PROPOSED and outside project truth pending Michael's
+  explicit ratification.
+- Updated this Master Project Map in the same commit as both new artifacts.
 
 
 NEXT ACTION:
 
-Field-test the same-commit Master Project Map workflow on an
-active repository such as Broken Frontier or RangeWater.
+Michael reviews FK-ENG-001 Revision 1.
 
-Record any friction as evidence before proposing another
-protocol version.
+If Michael ratifies it:
+1. record the ratification in this repository;
+2. create the separate Forgekeeper engine repository;
+3. implement the read-first, dry-run-first minimum engine against the contract.
+
+If Michael revises or rejects it:
+1. preserve Revision 1 as proposal history;
+2. issue a successor revision;
+3. do not create the engine repository under an unratified contract.
 
 
 DO NOT YET:
 
-- invent additional standard glyphs
-- declare v1.1 current
-- normalize historical raw engine artifacts in place
-- claim a formal v1.0.1 release before field review
+- create the separate Forgekeeper engine repository
+- describe FK-ENG-001 Revision 1 as ratified
+- grant the future engine authority to decide project truth
+- allow automatic writes to application code
+- declare the RangeWater pilot a clean CC-009 atomic-sync pass
+- invent a new CaveCode protocol version from one pilot
 
 
 ============================================================
@@ -580,79 +596,70 @@ This project map must not silently override the protocol.
 
 DATE:
 
-2026-09-26
+2026-09-27
 
 
 WHAT CHANGED?
 
-The repository was repaired around the original v1.0 semantic
-glyph vocabulary and the Broken Frontier-style repository
-Master Project Map was formalized as a protocol profile.
+The RangeWater field-adoption pilot was closed against live repository evidence.
+A qualified pilot closeout and FK-ENG-001 Revision 1 proposal were added, and
+this Master Project Map was updated atomically with those artifacts.
 
 
 WHAT WAS DECIDED?
 
-CC-001 through CC-012 are settled and recorded in Block 7.
-
-The crayon is 🖍️.
-
-Glyphs express roles rather than fixed block positions.
-
-Meaningful project-state commits update the repository map in
-the same commit.
+- RangeWater is FIELD ACCEPTED as the first Forgekeeper continuity pilot.
+- The result is qualified because CC-009 same-commit synchronization was not
+  achieved throughout the RangeWater release sequence.
+- The separate Forgekeeper engine will not be created before Michael ratifies
+  its minimum engine contract.
+- Project-specific continuity governance remains an overlay; it does not silently
+  alter the universal CaveCode v1.0 specification.
 
 
 WHY?
 
-The original protocol was coherent, while the unratified v1.1
-materials created competing glyph and block systems.
-
-Project truth must remain available inside the repository after
-the chat or AI session is gone.
+The pilot proved the workflow under real release pressure and exposed the exact
+friction a Forgekeeper engine must control: stale current-state records,
+distributed authority layers, connector safety limits, and non-atomic repair.
 
 
 WHAT CURRENTLY WORKS?
 
-The specification, README, teaching packs, public page,
-templates, scaffold, validator, fixer, converter, and maintained
-examples now express one v1.0 contract.
-
-Eight automated tests pass.
-
-Python compilation passes.
-
-This repository Master Project Map passes the project-profile
-validator with 13 canonical blocks.
+- CaveCode v1.0 maintained assets and eight protocol tests remain verified.
+- RangeWater has a ratified continuity contract, an active current-state index,
+  accepted release evidence, explicit supersession records, and a closed
+  production workorder.
+- FK-ENG-001 Revision 1 is complete enough for authority review.
 
 
 WHAT IS CURRENTLY BROKEN?
 
-No known failure remains in the maintained stabilization set.
+No maintained CaveCode v1.0 tooling failure is known.
 
-Historical artifacts retain old drift by design and have not
-been reclassified as compliant.
+The Forgekeeper engine does not yet exist.
+
+RangeWater's historical master ledger cannot be treated as its present-state
+entry point without following the later supersession and current-state records.
 
 
 WHAT REMAINS UNCERTAIN?
 
-See BLOCK 9 — OPEN QUESTIONS.
+- Whether Michael will ratify FK-ENG-001 Revision 1 as written.
+- The eventual Forgekeeper repository name and deployment surface.
+- Whether field evidence supports a later CaveCode patch release.
 
 
 WHAT SHOULD HAPPEN NEXT?
 
-Field-test the same-commit Master Project Map workflow on a
-live project and record any friction before changing the spec.
+Michael reviews and either ratifies, revises, or rejects FK-ENG-001 Revision 1.
 
 
 WHAT IS THE NEXT HUMAN OR AI MOST LIKELY TO MISUNDERSTAND?
 
-The Repository Master Project Map is not an optional diary when
-a project claims CaveCode Project-Managed compliance.
-
-It is the current-state control file and changes atomically with
-meaningful implementation work.
-
-Historical material remains evidence, not present authority.
+The RangeWater pilot was useful and field accepted, but not a clean proof that
+same-commit synchronization happens automatically. The engine contract is only
+a proposal. No separate Forgekeeper repository is authorized until ratification.
 
 
 ============================================================
