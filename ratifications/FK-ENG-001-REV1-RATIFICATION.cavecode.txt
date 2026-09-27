@@ -1,0 +1,115 @@
+============================================================
+FK-ENG-001-REV1-RATIFICATION.cavecode.txt
+Forgekeeper Minimum Engine Contract — Ratification Record
+============================================================
+
+RECORD ID:
+FK-ENG-001-RAT-001
+
+CONTRACT:
+FK-ENG-001 Revision 1
+
+STATE:
+RATIFIED
+
+AUTHORITY:
+Michael — Final Decision Authority
+
+RATIFIED DATE:
+2026-09-27
+
+RATIFIED CONTRACT EVIDENCE:
+- proposals/FK-ENG-001-REV1.cavecode.txt
+- Proposal commit: 1f17bd7bc34cfa82a2eaac73e8bae924cd283f98
+
+
+============================================================
+🪨 BLOCK 1 — AUTHORITY STATEMENT
+============================================================
+
+Michael stated on 2026-09-27:
+
+"I ratify FKENG-001 Revision 1, the Forge Keeper Minimum Inging Contract."
+
+The wording above preserves the received voice-transcribed statement.
+
+Normalized authority statement:
+
+"I ratify FK-ENG-001 Revision 1, the Forgekeeper Minimum Engine Contract."
+
+The identifier, revision, named project, preceding review context, and requested
+sequence make the authority unambiguous. Normalization corrects transcription
+spacing and the word "engine" without changing Michael's decision.
+
+
+============================================================
+🪨 BLOCK 2 — RATIFIED SCOPE
+============================================================
+
+Michael ratifies FK-ENG-001 Revision 1 in full, including:
+
+- the purpose and authority boundary;
+- the Forgekeeper state model;
+- authority and source precedence;
+- minimum inspection workflow;
+- read-only, dry-run, and assigned-write modes;
+- atomicity and drift rules;
+- safety and data-handling requirements;
+- separate-repository implementation boundary;
+- GitHub-first and CaveCode v1.0-first adapters;
+- deterministic core with optional AI assistance;
+- fourteen minimum acceptance tests;
+- Michael's continuing final authority over project truth.
+
+
+============================================================
+🎮 BLOCK 3 — AUTHORIZED TRANSITION
+============================================================
+
+Prior state:
+
+PROPOSED — AWAITING MICHAEL RATIFICATION.
+
+New state:
+
+RATIFIED.
+
+Assigned next work:
+
+1. Integrate the RangeWater pilot closeout and this ratification into the
+   authoritative CaveCode main branch.
+2. Create a separate private repository named cavecode-forgekeeper.
+3. Initialize that repository with the ratified contract, repository Master
+   Project Map, read-first documentation, and minimum testable scaffold.
+4. Do not claim IMPLEMENTED or VERIFIED until corresponding evidence exists.
+
+
+============================================================
+🪨 BLOCK 4 — CONTINUING LIMITS
+============================================================
+
+This ratification does not authorize Forgekeeper to:
+
+- ratify its own conclusions;
+- claim field acceptance without Michael;
+- change application code during continuity-only work;
+- merge, release, deploy, or delete autonomously;
+- store or expose secrets;
+- broaden its implementation scope beyond FK-ENG-001 Revision 1;
+- alter CaveCode v1.0 through implication.
+
+Any broader authority requires a successor ratified contract.
+
+
+============================================================
+🌐 BLOCK 5 — PUBLIC-SAFE SUMMARY
+============================================================
+
+Michael ratified FK-ENG-001 Revision 1 on 2026-09-27, authorizing creation and
+minimum implementation of a separate, read-first CaveCode Forgekeeper engine
+while retaining final human authority over project truth.
+
+
+============================================================
+END — FK-ENG-001-RAT-001 — RATIFIED
+============================================================
